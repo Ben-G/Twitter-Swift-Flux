@@ -13,4 +13,10 @@ struct Tweet {
   let retweetCount: Int
   let identifier: String
   let user: User
+  let type: Tweet.TweetType
+  
+  enum TweetType {
+    case RegularTweet
+    case Retweet
+  }
 }

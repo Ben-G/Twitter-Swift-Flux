@@ -49,11 +49,17 @@ private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
       name: tweet["user"]["name"].string!
     )
     
+    var tweetType = Tweet.TweetType.RegularTweet
+    if let retweet = tweet["retweeted"].bool {
+      tweetType = Tweet.TweetType.Retweet
+    }
+    
     return Tweet(
       content: tweet["text"].string!,
       retweetCount: tweet["retweet_count"].integer!,
       identifier: tweet["id_str"].string!,
-      user: user
+      user: user,
+      type: tweetType
     )
   })
 }

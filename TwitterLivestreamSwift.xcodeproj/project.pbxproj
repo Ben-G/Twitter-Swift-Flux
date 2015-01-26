@@ -24,6 +24,7 @@
 		6274B2B71A76AC730010BC8A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6274B2B31A76AC200010BC8A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2B91A76CCEC0010BC8A /* TwitterClient.swift */; };
 		6274B2BC1A76CCF90010BC8A /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */; };
+		6274B2BE1A7701F30010BC8A /* TweetFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2BD1A7701F30010BC8A /* TweetFilters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		6274B2AA1A76AC1F0010BC8A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-1.1.3/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		6274B2B91A76CCEC0010BC8A /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownload.swift; sourceTree = "<group>"; };
+		6274B2BD1A7701F30010BC8A /* TweetFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetFilters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				623AD4751A74D67900678EFF /* LaunchScreen.xib */,
 				623AD46A1A74D67900678EFF /* Supporting Files */,
 				6274B2A31A7542170010BC8A /* Tweet.swift */,
+				6274B2BD1A7701F30010BC8A /* TweetFilters.swift */,
 				6274B2A51A76A16B0010BC8A /* User.swift */,
 			);
 			path = TwitterLivestreamSwift;
@@ -509,6 +512,7 @@
 				6274B2A41A7542170010BC8A /* Tweet.swift in Sources */,
 				6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */,
 				6274B2A91A76A41B0010BC8A /* TweetTableViewCell.swift in Sources */,
+				6274B2BE1A7701F30010BC8A /* TweetFilters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

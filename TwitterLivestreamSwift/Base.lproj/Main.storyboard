@@ -77,14 +77,28 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="zBd-Hz-R3Z"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tl-I2-QHg">
+                                <rect key="frame" x="16" y="33" width="141" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="141" id="8m4-QW-9bn"/>
+                                    <constraint firstAttribute="height" constant="30" id="zMW-ql-BNO"/>
+                                </constraints>
+                                <state key="normal" title="Retweets">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="2tb-Kz-3BZ"/>
+                            <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="0tl-I2-QHg" secondAttribute="bottom" constant="37" id="7lY-YW-wkf"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="90M-0V-M7F"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EBP-Xh-fXT"/>
+                            <constraint firstItem="0tl-I2-QHg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JIq-x9-bQ5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCs-gK-Eam" secondAttribute="bottom" id="Q37-ty-KWX"/>
                             <constraint firstAttribute="trailing" secondItem="dCs-gK-Eam" secondAttribute="trailing" id="Tak-ca-uiO"/>
+                            <constraint firstItem="0tl-I2-QHg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="r99-lT-hAz"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

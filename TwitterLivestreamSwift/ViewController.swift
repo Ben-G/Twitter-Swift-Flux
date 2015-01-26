@@ -9,20 +9,30 @@
 import UIKit
 import SwifteriOS
 
+typealias TweetFilter = [Tweet] -> [Tweet]
+
 class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView?
-  var tweets: [Tweet]?
+  
+  var filters:[TweetFilter]?
+  
+  var tweets: [Tweet]? {
+    didSet {
+      if let tweets = tweets {
+        // TODO: apply all filters
+        self.tableView?.reloadData()
+      }
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
 
     fetchTweets().then {tweets -> () in
       self.tweets = tweets
-      self.tableView?.reloadData()
     }
   }
-
 }
 
 extension ViewController: UITableViewDataSource {

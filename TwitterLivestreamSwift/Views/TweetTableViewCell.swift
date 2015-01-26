@@ -17,21 +17,34 @@ class TweetTableViewCell: UITableViewCell {
   
   var tweet:Tweet? {
     didSet {
+      if tweet?.identifier == oldValue?.identifier {
+        return
+      }
+      
       if let tweet = tweet {
+        // reset the image before we start loading the new one
+        profilePictureImageView.image = nil
         userNameLabel.text = tweet.user.name
         contentLabel.text = tweet.content
-        fetchImage(tweet.user.profileImageURL).then { [weak self] image -> () in
+        
+        let imageDownloadPromise = fetchImage(tweet.user.profileImageURL)
+        
+        imageDownloadPromise.then { [weak self] image -> () in
           if let nonOptionalSelf = self {
             if (nonOptionalSelf.tweet?.identifier == tweet.identifier) {
               nonOptionalSelf.profilePictureImageView.image = image
             }
           }
         }
+        
+        imageDownloadPromise.catch { [weak self] e->() in
+          if let nonOptionalSelf = self {
+            nonOptionalSelf.profilePictureImageView.image = nil
+          }
+        }
+        
       }
     }
   }
   
-  override func prepareForReuse() {
-    profilePictureImageView.image = nil
-  }
 }
