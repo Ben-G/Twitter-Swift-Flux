@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TwitterLivestreamSwift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +16,85 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dCs-gK-Eam">
+                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tweetCell" rowHeight="92" id="KMG-fu-aiZ" customClass="TweetTableViewCell" customModule="TwitterLivestreamSwift" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KMG-fu-aiZ" id="hil-8Y-DXI">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D2T-Ia-dzb">
+                                                    <rect key="frame" x="22" y="16" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="Equ-uE-fth"/>
+                                                        <constraint firstAttribute="height" constant="60" id="qiE-s7-Vqi"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVu-q2-Q3l">
+                                                    <rect key="frame" x="90" y="20" width="402" height="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@BethKorth myself and @angstygaijin just played your game, din't take this the wrong way, this is a very SPECIAL narrative" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDv-rF-MNW">
+                                                    <rect key="frame" x="90" y="26" width="494" height="57"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="sDv-rF-MNW" secondAttribute="bottom" constant="0.5" id="0UA-tb-Hwy"/>
+                                                <constraint firstItem="ZVu-q2-Q3l" firstAttribute="top" secondItem="D2T-Ia-dzb" secondAttribute="top" constant="4" id="Bda-94-vmA"/>
+                                                <constraint firstItem="sDv-rF-MNW" firstAttribute="leading" secondItem="D2T-Ia-dzb" secondAttribute="trailing" constant="8" id="Jw6-7m-pcb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sDv-rF-MNW" secondAttribute="trailing" constant="8" id="KO3-PU-tw7"/>
+                                                <constraint firstItem="D2T-Ia-dzb" firstAttribute="leading" secondItem="hil-8Y-DXI" secondAttribute="leadingMargin" constant="14" id="PAR-jC-xV0"/>
+                                                <constraint firstItem="ZVu-q2-Q3l" firstAttribute="leading" secondItem="D2T-Ia-dzb" secondAttribute="trailing" constant="8" id="VDg-1h-M4m"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ZVu-q2-Q3l" secondAttribute="trailing" constant="100" id="Wov-IN-zZY"/>
+                                                <constraint firstItem="sDv-rF-MNW" firstAttribute="top" secondItem="hil-8Y-DXI" secondAttribute="topMargin" constant="18" id="gqJ-rd-AMk"/>
+                                                <constraint firstAttribute="centerY" secondItem="D2T-Ia-dzb" secondAttribute="centerY" id="mgV-9X-aoc"/>
+                                                <constraint firstItem="ZVu-q2-Q3l" firstAttribute="top" secondItem="sDv-rF-MNW" secondAttribute="top" constant="-6" id="zIh-1H-VI7"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="gqJ-rd-AMk"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentLabel" destination="sDv-rF-MNW" id="wF5-Dv-Ipp"/>
+                                            <outlet property="profilePictureImageView" destination="D2T-Ia-dzb" id="hCh-hU-KiZ"/>
+                                            <outlet property="userNameLabel" destination="ZVu-q2-Q3l" id="Ws2-Vv-bQj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Fol-3L-7ly"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="zBd-Hz-R3Z"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="2tb-Kz-3BZ"/>
+                            <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="90M-0V-M7F"/>
+                            <constraint firstItem="dCs-gK-Eam" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EBP-Xh-fXT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCs-gK-Eam" secondAttribute="bottom" id="Q37-ty-KWX"/>
+                            <constraint firstAttribute="trailing" secondItem="dCs-gK-Eam" secondAttribute="trailing" id="Tak-ca-uiO"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="90M-0V-M7F"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="dCs-gK-Eam" id="GHQ-Br-cWy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

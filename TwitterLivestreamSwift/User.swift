@@ -1,16 +1,15 @@
 //
-//  Tweet.swift
+//  User.swift
 //  TwitterLivestreamSwift
 //
-//  Created by Benjamin Encz on 1/25/15.
+//  Created by Benjamin Encz on 1/26/15.
 //  Copyright (c) 2015 Benjamin Encz. All rights reserved.
 //
 
 import Foundation
 
-struct Tweet {
-  let content: String
-  let retweetCount: Int
+struct User {
+  let profileImageURL: String
   let identifier: String
-  let user: User
+  let name: String
 }

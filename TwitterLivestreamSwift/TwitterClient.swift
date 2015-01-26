@@ -11,13 +11,13 @@ import Foundation
 import Accounts
 import SwifteriOS
 
-func fetchTweets() -> Promise<[Tweet]> {
+func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
   return login().then(body: {swifter in
-    return loadTweets(swifter)
+    return loadTweets(swifter, amount)
   })
 }
 
-func login() -> Promise<Swifter> {
+private func login() -> Promise<Swifter> {
   let accountType = ACAccountStore().accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
   let accountStore = ACAccountStore()
   
@@ -31,19 +31,29 @@ func login() -> Promise<Swifter> {
   }
 }
 
-func loadTweets(swifter:Swifter) -> Promise<[Tweet]> {
+private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[Tweet]> {
   return Promise { (fulfiller, _) in
 
-    swifter.getStatusesHomeTimelineWithCount(20, sinceID: nil, maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: nil, success: { (statuses) -> Void in
+    swifter.getStatusesHomeTimelineWithCount(amount, sinceID: nil, maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: nil, success: { (statuses) -> Void in
         fulfiller(parseTweets(statuses!))
       }, failure: { (error) -> Void in
-      
     })
   }
 }
 
-func parseTweets(tweets: [JSONValue]) -> [Tweet] {
+private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
   return tweets.map({ tweet in
-    Tweet(content: tweet["text"].string!)
+    let user = User (
+      profileImageURL:tweet["user"]["profile_image_url"].string!,
+      identifier: tweet["user"]["id_str"].string!,
+      name: tweet["user"]["name"].string!
+    )
+    
+    return Tweet(
+      content: tweet["text"].string!,
+      retweetCount: tweet["retweet_count"].integer!,
+      identifier: tweet["id_str"].string!,
+      user: user
+    )
   })
 }
