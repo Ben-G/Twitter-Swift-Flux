@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+
     fetchTweets().then {tweets -> () in
       self.tweets = tweets
       self.tableView?.reloadData()

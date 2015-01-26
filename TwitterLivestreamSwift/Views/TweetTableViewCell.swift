@@ -20,6 +20,9 @@ class TweetTableViewCell: UITableViewCell {
       if let tweet = tweet {
         userNameLabel.text = tweet.user.name
         contentLabel.text = tweet.content
+        fetchImage(tweet.user.profileImageURL).then { image in
+          self.profilePictureImageView.image = image
+        }
       }
     }
   }
