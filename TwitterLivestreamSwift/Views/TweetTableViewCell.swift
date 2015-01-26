@@ -20,10 +20,18 @@ class TweetTableViewCell: UITableViewCell {
       if let tweet = tweet {
         userNameLabel.text = tweet.user.name
         contentLabel.text = tweet.content
-        fetchImage(tweet.user.profileImageURL).then { image in
-          self.profilePictureImageView.image = image
+        fetchImage(tweet.user.profileImageURL).then { [weak self] image -> () in
+          if let nonOptionalSelf = self {
+            if (nonOptionalSelf.tweet?.identifier == tweet.identifier) {
+              nonOptionalSelf.profilePictureImageView.image = image
+            }
+          }
         }
       }
     }
+  }
+  
+  override func prepareForReuse() {
+    profilePictureImageView.image = nil
   }
 }

@@ -10,46 +10,11 @@ import PromiseKit
 import Foundation
 import Accounts
 import SwifteriOS
-import Alamofire
 
 func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
   return login().then(body: {swifter in
     return loadTweets(swifter, amount)
   })
-}
-
-func fetchImage(urlString:String) -> Promise<UIImage> {
-  return Promise { (fulfill, reject) in
-      Alamofire.download(.GET, urlString, { (temporaryURL, response) in
-        if let directoryURL = NSFileManager.defaultManager()
-          .URLsForDirectory(.DocumentDirectory,
-            inDomains: .UserDomainMask)[0]
-          as? NSURL {
-            let pathComponent = response.suggestedFilename
-            let url = directoryURL.URLByAppendingPathComponent(pathComponent!)
-            let imageData = NSData(contentsOfURL: url)
-            if let imageData = imageData {
-              let image = UIImage(data: imageData)
-              if let image = image {
-                fulfill(image)
-              } else {
-                reject(NSError(domain: "", code: 0, userInfo: nil))
-              }
-            } else {
-              reject(NSError(domain: "", code: 0, userInfo: nil))
-            }
-            
-            return url
-        }
-        
-        let imageData = NSData(contentsOfURL: temporaryURL)!
-        let image = UIImage(data: imageData)!
-        fulfill(image)
-        
-        return temporaryURL
-      })
-      return
-  }
 }
 
 private func login() -> Promise<Swifter> {
