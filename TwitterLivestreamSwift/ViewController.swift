@@ -27,9 +27,13 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    self.filters = [Retweets]
     
+    loadTweets()
+    
+    var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
+  }
+  
+  func loadTweets() {
     fetchTweets().then {[weak self] tweets -> () in
       if self == nil {
         return
@@ -46,6 +50,7 @@ class ViewController: UIViewController {
       self!.tweets = filteredTweets
     }
   }
+  
 }
 
 extension ViewController: UITableViewDataSource {
