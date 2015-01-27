@@ -20,7 +20,7 @@ class ViewController: UIViewController {
   
   var serverTweets: [Tweet]? {
     didSet {
-      tweets = mergeTweetsIntoTweetsLeftPriority(localState, serverTweets!)
+      tweets = mergeListIntoListLeftPriority(localState, serverTweets!)
     }
   }
   
@@ -104,7 +104,7 @@ extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
     )
     
     addTweetChangeToLocalState(newTweet)
-    tweets = mergeTweetsIntoTweetsLeftPriority([newTweet], tweets!)
+    tweets = mergeListIntoListLeftPriority([newTweet], tweets!)
   }
 }
 

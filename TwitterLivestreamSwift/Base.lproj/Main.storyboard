@@ -132,8 +132,8 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="tWW-Ax-Bo1"/>
                                         <exclude reference="tOm-0t-GeZ"/>
+                                        <exclude reference="tWW-Ax-Bo1"/>
                                     </mask>
                                 </variation>
                             </button>
