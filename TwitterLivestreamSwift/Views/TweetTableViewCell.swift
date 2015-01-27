@@ -24,6 +24,12 @@ class TweetTableViewCell: UITableViewCell {
   var tweet:Tweet? {
     didSet {
       if tweet?.identifier == oldValue?.identifier {
+        if (tweet!.isFavorited) {
+          self.contentView.backgroundColor = UIColor.lightGrayColor()
+        } else {
+          self.contentView.backgroundColor = UIColor.whiteColor()
+        }
+        
         return
       }
       
@@ -32,8 +38,6 @@ class TweetTableViewCell: UITableViewCell {
         profilePictureImageView.image = nil
         userNameLabel.text = tweet.user.name
         contentLabel.text = tweet.content
-        
-        updateFavoriteState()
         
         let imageDownloadPromise = fetchImage(tweet.user.profileImageURL)
         
@@ -58,15 +62,7 @@ class TweetTableViewCell: UITableViewCell {
   @IBAction func favoriteButtonPressed(sender: AnyObject) {
     if let favoriteDelegate = favoriteDelegate {
       favoriteDelegate.didFavorite(self)
-      updateFavoriteState()
     }
   }
-  
-  func updateFavoriteState() {
-    if (isTweetFavorited(tweet!)) {
-    self.contentView.backgroundColor = UIColor.lightGrayColor()
-    } else {
-    self.contentView.backgroundColor = UIColor.whiteColor()
-    }
-  }
+
 }

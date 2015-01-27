@@ -10,22 +10,18 @@ import Foundation
 
 var favoritedTweets:[String] = []
 
-func toggleFavoriteState(tweet:Tweet) -> Bool {
-  var index = find(favoritedTweets, tweet.identifier)
-  if let index = index {
-    favoritedTweets.removeAtIndex(index)
-    return false
-  } else {
-    favoritedTweets.append(tweet.identifier)
-    return true
-  }
-}
-
-func isTweetFavorited(tweet:Tweet) -> Bool {
-  var index = find(favoritedTweets, tweet.identifier)
-  if let index = index {
-    return true
-  } else {
-    return false
-  }
+func mergeTweetsIntoTweetsLeftPriority(tweetsLeft:[Tweet], tweetsRight:[Tweet]) -> [Tweet] {
+  var tweets = [Tweet]()
+  tweets = tweetsRight
+  
+  tweets = tweets.map({ tweet -> Tweet in
+    let index = find(tweetsLeft, tweet)
+    if let index = index {
+      return tweetsLeft[index]
+    } else {
+      return tweet
+    }
+  })
+  
+  return tweets
 }

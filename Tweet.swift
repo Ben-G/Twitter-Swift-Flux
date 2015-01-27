@@ -8,15 +8,20 @@
 
 import Foundation
 
-struct Tweet {
+struct Tweet : Equatable {
   let content: String
   let identifier: String
   let user: User
   let type: Tweet.TweetType
   let favoriteCount: Int
+  let isFavorited: Bool
   
   enum TweetType {
     case RegularTweet
     case Retweet
   }
+}
+
+func ==(lhs: Tweet, rhs: Tweet) -> Bool {
+  return lhs.identifier == rhs.identifier
 }

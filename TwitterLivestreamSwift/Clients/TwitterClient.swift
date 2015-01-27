@@ -61,7 +61,8 @@ private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
       identifier: tweet["id_str"].string!,
       user: user,
       type: tweetType,
-      favoriteCount:favoriteCount
+      favoriteCount:favoriteCount,
+      isFavorited: false
     )
   })
 }
