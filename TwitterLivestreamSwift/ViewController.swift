@@ -18,6 +18,12 @@ class ViewController: UIViewController {
   var filters:[TweetFilter]?
   var timer:NSTimer?
   
+  var serverTweets: [Tweet]? {
+    didSet {
+      tweets = mergeListIntoListLeftPriority(localState, serverTweets!)
+    }
+  }
+  
   var tweets: [Tweet]? {
     didSet {
       if let tweets = tweets {
@@ -26,16 +32,18 @@ class ViewController: UIViewController {
     }
   }
   
+  var localState: [Tweet] = []
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     loadTweets()
     
-    timer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
+    timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
   }
   
   func loadTweets() {
-    fetchTweets().then {[weak self] tweets -> () in
+    fetchTweets(amount:10).then {[weak self] tweets -> () in
       if self == nil {
         return
       }
@@ -48,9 +56,30 @@ class ViewController: UIViewController {
         }
       }
       
-      self!.tweets = filteredTweets
+      self!.serverTweets = filteredTweets
+      // handle upload
+      syncFavorites(StateMerge(originalList:self!.serverTweets!, localState: self!.localState)).then(body: { syncResult -> () in
+        switch syncResult {
+        case SyncResult.Success(let stateMerge):
+            self!.localState = stateMerge.localState
+        case SyncResult.Error(let stateMerge):
+            self!.localState = stateMerge.localState
+        }
+        return
+      })
+      
     }
   }
+  
+  func addTweetChangeToLocalState(tweet: Tweet) {
+    let index = find(localState, tweet)
+    if let index = index {
+      localState[index] = tweet
+    } else {
+      localState.append(tweet)
+    }
+  }
+
 }
 
 extension ViewController: UITableViewDataSource {
@@ -72,9 +101,23 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
+  
   func didFavorite(tweetTableViewCell:TweetTableViewCell) {
-    toggleFavoriteState(tweetTableViewCell.tweet!)
+    let currentTweet = tweetTableViewCell.tweet!
+    
+    let newTweet = Tweet(
+      content: currentTweet.content,
+      identifier: currentTweet.identifier,
+      user: currentTweet.user,
+      type: currentTweet.type,
+      favoriteCount: currentTweet.favoriteCount,
+      isFavorited: !currentTweet.isFavorited
+    )
+    
+    addTweetChangeToLocalState(newTweet)
+    tweets = mergeListIntoListLeftPriority([newTweet], tweets!)
   }
 }
+
 
 
