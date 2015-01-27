@@ -16,6 +16,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView?
   
   var filters:[TweetFilter]?
+  var timer:NSTimer?
   
   var tweets: [Tweet]? {
     didSet {
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
     
     loadTweets()
     
-    var timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
+    timer = NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
   }
   
   func loadTweets() {
@@ -50,7 +51,6 @@ class ViewController: UIViewController {
       self!.tweets = filteredTweets
     }
   }
-  
 }
 
 extension ViewController: UITableViewDataSource {
@@ -63,12 +63,18 @@ extension ViewController: UITableViewDataSource {
     if let tweets = tweets {
       let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as TweetTableViewCell
       cell.tweet = tweets[indexPath.row]
+      cell.favoriteDelegate = self
       return cell
     } else {
       return UITableViewCell()
     }
   }
+}
 
+extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
+  func didFavorite(tweetTableViewCell:TweetTableViewCell) {
+    toggleFavoriteState(tweetTableViewCell.tweet!)
+  }
 }
 
 

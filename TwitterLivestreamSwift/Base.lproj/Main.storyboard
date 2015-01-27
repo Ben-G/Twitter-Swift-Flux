@@ -27,6 +27,12 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KMG-fu-aiZ" id="hil-8Y-DXI">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@BethKorth myself and @angstygaijin just played your game, din't take this the wrong way, this is a very SPECIAL narrative" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDv-rF-MNW">
+                                                    <rect key="frame" x="90" y="26" width="494" height="57"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D2T-Ia-dzb">
                                                     <rect key="frame" x="22" y="16" width="60" height="60"/>
                                                     <constraints>
@@ -40,21 +46,26 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@BethKorth myself and @angstygaijin just played your game, din't take this the wrong way, this is a very SPECIAL narrative" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDv-rF-MNW">
-                                                    <rect key="frame" x="90" y="26" width="494" height="57"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4q-ea-py0">
+                                                    <rect key="frame" x="536" y="8" width="56" height="30"/>
+                                                    <state key="normal" title="Favorite">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="favoriteButtonPressed:" destination="KMG-fu-aiZ" eventType="touchUpInside" id="R9L-x2-xqp"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="sDv-rF-MNW" secondAttribute="bottom" constant="0.5" id="0UA-tb-Hwy"/>
                                                 <constraint firstItem="ZVu-q2-Q3l" firstAttribute="top" secondItem="D2T-Ia-dzb" secondAttribute="top" constant="4" id="Bda-94-vmA"/>
+                                                <constraint firstItem="K4q-ea-py0" firstAttribute="trailing" secondItem="hil-8Y-DXI" secondAttribute="trailingMargin" id="C4C-3l-hJQ"/>
                                                 <constraint firstItem="sDv-rF-MNW" firstAttribute="leading" secondItem="D2T-Ia-dzb" secondAttribute="trailing" constant="8" id="Jw6-7m-pcb"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="sDv-rF-MNW" secondAttribute="trailing" constant="8" id="KO3-PU-tw7"/>
                                                 <constraint firstItem="D2T-Ia-dzb" firstAttribute="leading" secondItem="hil-8Y-DXI" secondAttribute="leadingMargin" constant="14" id="PAR-jC-xV0"/>
                                                 <constraint firstItem="ZVu-q2-Q3l" firstAttribute="leading" secondItem="D2T-Ia-dzb" secondAttribute="trailing" constant="8" id="VDg-1h-M4m"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ZVu-q2-Q3l" secondAttribute="trailing" constant="100" id="Wov-IN-zZY"/>
+                                                <constraint firstItem="K4q-ea-py0" firstAttribute="top" secondItem="hil-8Y-DXI" secondAttribute="topMargin" id="XxC-58-loD"/>
                                                 <constraint firstItem="sDv-rF-MNW" firstAttribute="top" secondItem="hil-8Y-DXI" secondAttribute="topMargin" constant="18" id="gqJ-rd-AMk"/>
                                                 <constraint firstAttribute="centerY" secondItem="D2T-Ia-dzb" secondAttribute="centerY" id="mgV-9X-aoc"/>
                                                 <constraint firstItem="ZVu-q2-Q3l" firstAttribute="top" secondItem="sDv-rF-MNW" secondAttribute="top" constant="-6" id="zIh-1H-VI7"/>

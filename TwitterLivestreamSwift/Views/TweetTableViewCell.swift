@@ -9,11 +9,17 @@
 import Foundation
 import UIKit
 
+protocol TweetTableViewCellFavoriteDelegateProtocol : class {
+  func didFavorite(tweetTableViewCell:TweetTableViewCell)
+}
+
 class TweetTableViewCell: UITableViewCell {
   
   @IBOutlet weak var profilePictureImageView: UIImageView!
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var contentLabel: UILabel!
+  
+  weak var favoriteDelegate:TweetTableViewCellFavoriteDelegateProtocol?
   
   var tweet:Tweet? {
     didSet {
@@ -26,6 +32,8 @@ class TweetTableViewCell: UITableViewCell {
         profilePictureImageView.image = nil
         userNameLabel.text = tweet.user.name
         contentLabel.text = tweet.content
+        
+        updateFavoriteState()
         
         let imageDownloadPromise = fetchImage(tweet.user.profileImageURL)
         
@@ -47,4 +55,18 @@ class TweetTableViewCell: UITableViewCell {
     }
   }
   
+  @IBAction func favoriteButtonPressed(sender: AnyObject) {
+    if let favoriteDelegate = favoriteDelegate {
+      favoriteDelegate.didFavorite(self)
+      updateFavoriteState()
+    }
+  }
+  
+  func updateFavoriteState() {
+    if (isTweetFavorited(tweet!)) {
+    self.contentView.backgroundColor = UIColor.lightGrayColor()
+    } else {
+    self.contentView.backgroundColor = UIColor.whiteColor()
+    }
+  }
 }
