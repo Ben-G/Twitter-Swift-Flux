@@ -109,13 +109,20 @@ private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
     
     let favoriteCount = tweet["favorite_count"].integer ?? 0
     
+    var favorited = false
+    if let favoritedTweet = tweet["favorited"].integer {
+      if (favoritedTweet == 1) {
+        favorited = true
+      }
+    }
+    
     return Tweet(
       content: tweet["text"].string!,
       identifier: tweet["id_str"].string!,
       user: user,
       type: tweetType,
       favoriteCount:favoriteCount,
-      isFavorited: false
+      isFavorited: favorited
     )
   })
 }

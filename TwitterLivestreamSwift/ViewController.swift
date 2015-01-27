@@ -57,6 +57,17 @@ class ViewController: UIViewController {
       }
       
       self!.serverTweets = filteredTweets
+      // handle upload
+      syncFavorites(StateMerge(originalList:self!.serverTweets!, localState: self!.localState)).then(body: { syncResult -> () in
+        switch syncResult {
+        case SyncResult.Success(let stateMerge):
+            self!.localState = stateMerge.localState
+        case SyncResult.Error(let stateMerge):
+            self!.localState = stateMerge.localState
+        }
+        return
+      })
+      
     }
   }
   
