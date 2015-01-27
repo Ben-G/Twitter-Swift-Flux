@@ -23,17 +23,17 @@ class TweetTableViewCell: UITableViewCell {
   
   var tweet:Tweet? {
     didSet {
-      if tweet?.identifier == oldValue?.identifier {
-        if (tweet!.isFavorited) {
+      if let tweet = tweet {
+        if (tweet.isFavorited) {
           self.contentView.backgroundColor = UIColor.lightGrayColor()
         } else {
           self.contentView.backgroundColor = UIColor.whiteColor()
         }
         
-        return
-      }
-      
-      if let tweet = tweet {
+        if tweet.identifier == oldValue?.identifier {
+          return
+        }
+        
         // reset the image before we start loading the new one
         profilePictureImageView.image = nil
         userNameLabel.text = tweet.user.name
@@ -64,5 +64,4 @@ class TweetTableViewCell: UITableViewCell {
       favoriteDelegate.didFavorite(self)
     }
   }
-
 }
