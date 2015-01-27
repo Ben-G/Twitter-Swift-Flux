@@ -12,11 +12,10 @@ import PromiseKit
 
 func fetchImage(urlString:String) -> Promise<UIImage> {
   let fileName = filenameForURLString(urlString)
+  
   if (NSFileManager.defaultManager().fileExistsAtPath(fileName.absoluteString!)) {
-    return Promise { (fulfill, _) in
-      let image = UIImage(contentsOfFile: fileName.absoluteString!)!
-      fulfill(image)
-    }
+    let image = UIImage(contentsOfFile: fileName.absoluteString!)!
+    return Promise(value: image)
   }
   
   return Promise { (fulfill, reject) in
