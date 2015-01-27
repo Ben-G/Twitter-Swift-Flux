@@ -17,6 +17,59 @@ func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
   })
 }
 
+func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
+  var originalList = stateMerge.originalList
+  var localState = stateMerge.localState
+  
+  return Promise { fullfil, _ in
+    var syncPromises = [Promise<Void>]()
+    
+      login().then(body: {swifter -> () in
+        syncPromises = stateMerge.localState.map { tweet -> Promise<Void> in
+          if (tweet.isFavorited) {
+            return Promise { fulfill, _ in
+              let tweetId = tweet.identifier.toInt()!
+              swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
+                let index = find(localState, tweet)
+                if let index = index {
+                  originalList = mergeListIntoListLeftPriority(localState, originalList)
+                  localState.removeAtIndex(index)
+                }
+                fulfill()
+                }, failure: { (error) -> Void in })
+            }
+          } else {
+            return Promise { fulfill, _ in
+              let tweetId = tweet.identifier.toInt()!
+              swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
+                let index = find(localState, tweet)
+                if let index = index {
+                  originalList = mergeListIntoListLeftPriority(localState, originalList)
+                  localState.removeAtIndex(index)
+                }
+                fulfill()
+                }, failure: { (error) -> Void in })
+            }
+          }
+        }
+        
+        when(syncPromises).then(body: { results in
+          fullfil(SyncResult.Success(StateMerge(originalList: originalList,localState: localState)))
+        })
+      })
+  }
+}
+
+struct StateMerge<T> {
+  let originalList: [T]
+  let localState: [T]
+}
+
+enum SyncResult {
+  case Success(StateMerge<Tweet>)
+  case Error(StateMerge<Tweet>)
+}
+
 private func login() -> Promise<Swifter> {
   let accountType = ACAccountStore().accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
   let accountStore = ACAccountStore()

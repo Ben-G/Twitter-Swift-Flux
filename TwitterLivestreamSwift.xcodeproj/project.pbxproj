@@ -25,7 +25,6 @@
 		6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2B91A76CCEC0010BC8A /* TwitterClient.swift */; };
 		6274B2BC1A76CCF90010BC8A /* ImageDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */; };
 		6274B2BE1A7701F30010BC8A /* TweetFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2BD1A7701F30010BC8A /* TweetFilters.swift */; };
-		6274B2C11A7721B70010BC8A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6274B2C01A7721B70010BC8A /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,7 +165,6 @@
 		6274B2B91A76CCEC0010BC8A /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownload.swift; sourceTree = "<group>"; };
 		6274B2BD1A7701F30010BC8A /* TweetFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetFilters.swift; sourceTree = "<group>"; };
-		6274B2C01A7721B70010BC8A /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +208,6 @@
 		623AD4691A74D67900678EFF /* TwitterLivestreamSwift */ = {
 			isa = PBXGroup;
 			children = (
-				6274B2BF1A7721A50010BC8A /* Persistence */,
 				6274B2B81A76CCEC0010BC8A /* Clients */,
 				6274B2A71A76A4000010BC8A /* Views */,
 				623AD4A61A753B4200678EFF /* Libraries */,
@@ -309,14 +306,6 @@
 				6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */,
 			);
 			path = Clients;
-			sourceTree = "<group>";
-		};
-		6274B2BF1A7721A50010BC8A /* Persistence */ = {
-			isa = PBXGroup;
-			children = (
-				6274B2C01A7721B70010BC8A /* Persistence.swift */,
-			);
-			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,7 +505,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6274B2C11A7721B70010BC8A /* Persistence.swift in Sources */,
 				623AD5E71A75404B00678EFF /* AppDelegate.swift in Sources */,
 				623AD5E81A75404B00678EFF /* ViewController.swift in Sources */,
 				6274B2A61A76A16B0010BC8A /* User.swift in Sources */,
