@@ -78,27 +78,69 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tl-I2-QHg">
-                                <rect key="frame" x="16" y="33" width="141" height="30"/>
+                                <rect key="frame" x="16" y="33" width="100" height="30"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="141" id="8m4-QW-9bn"/>
+                                    <constraint firstAttribute="width" constant="100" id="8m4-QW-9bn"/>
                                     <constraint firstAttribute="height" constant="30" id="zMW-ql-BNO"/>
                                 </constraints>
                                 <state key="normal" title="Retweets">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0P-tI-nb2">
+                                <rect key="frame" x="139" y="33" width="100" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3UV-1n-edT"/>
+                                    <constraint firstAttribute="height" constant="30" id="6bR-tp-YzM"/>
+                                    <constraint firstAttribute="width" constant="141" id="NK6-6w-qFA"/>
+                                    <constraint firstAttribute="width" constant="100" id="zgd-pF-rCO"/>
+                                </constraints>
+                                <state key="normal" title="Favorited">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3UV-1n-edT"/>
+                                        <exclude reference="NK6-6w-qFA"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOz-ns-g1f">
+                                <rect key="frame" x="262" y="33" width="100" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Nnd-OW-Bmy"/>
+                                    <constraint firstAttribute="height" constant="30" id="YUz-OQ-79n"/>
+                                    <constraint firstAttribute="width" constant="141" id="tOm-0t-GeZ"/>
+                                    <constraint firstAttribute="height" constant="30" id="tWW-Ax-Bo1"/>
+                                </constraints>
+                                <state key="normal" title="Short Tweets">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="tWW-Ax-Bo1"/>
+                                        <exclude reference="tOm-0t-GeZ"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="g0P-tI-nb2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="2p5-Tn-2cn"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="2tb-Kz-3BZ"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="0tl-I2-QHg" secondAttribute="bottom" constant="37" id="7lY-YW-wkf"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="90M-0V-M7F"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EBP-Xh-fXT"/>
+                            <constraint firstItem="eOz-ns-g1f" firstAttribute="leading" secondItem="g0P-tI-nb2" secondAttribute="trailing" constant="23" id="FNM-b6-5BK"/>
                             <constraint firstItem="0tl-I2-QHg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JIq-x9-bQ5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCs-gK-Eam" secondAttribute="bottom" id="Q37-ty-KWX"/>
                             <constraint firstAttribute="trailing" secondItem="dCs-gK-Eam" secondAttribute="trailing" id="Tak-ca-uiO"/>
+                            <constraint firstItem="eOz-ns-g1f" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="ee3-t1-U09"/>
                             <constraint firstItem="0tl-I2-QHg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="r99-lT-hAz"/>
+                            <constraint firstItem="g0P-tI-nb2" firstAttribute="leading" secondItem="0tl-I2-QHg" secondAttribute="trailing" constant="23" id="xQL-wP-yfV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

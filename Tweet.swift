@@ -10,10 +10,10 @@ import Foundation
 
 struct Tweet {
   let content: String
-  let retweetCount: Int
   let identifier: String
   let user: User
   let type: Tweet.TweetType
+  let favoriteCount: Int
   
   enum TweetType {
     case RegularTweet

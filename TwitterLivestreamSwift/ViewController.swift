@@ -20,7 +20,6 @@ class ViewController: UIViewController {
   var tweets: [Tweet]? {
     didSet {
       if let tweets = tweets {
-        // TODO: apply all filters
         self.tableView?.reloadData()
       }
     }
@@ -29,8 +28,22 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    fetchTweets().then {tweets -> () in
-      self.tweets = tweets
+    self.filters = [Retweets]
+    
+    fetchTweets().then {[weak self] tweets -> () in
+      if self == nil {
+        return
+      }
+      
+      var filteredTweets = tweets
+      
+      if let filters = self!.filters {
+        for Filter in filters {
+          filteredTweets = Filter(filteredTweets)
+        }
+      }
+      
+      self!.tweets = filteredTweets
     }
   }
 }

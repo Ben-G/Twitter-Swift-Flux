@@ -50,16 +50,18 @@ private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
     )
     
     var tweetType = Tweet.TweetType.RegularTweet
-    if let retweet = tweet["retweeted"].bool {
+    if let retweet = tweet["retweeted_status"].object {
       tweetType = Tweet.TweetType.Retweet
     }
     
+    let favoriteCount = tweet["favorite_count"].integer ?? 0
+    
     return Tweet(
       content: tweet["text"].string!,
-      retweetCount: tweet["retweet_count"].integer!,
       identifier: tweet["id_str"].string!,
       user: user,
-      type: tweetType
+      type: tweetType,
+      favoriteCount:favoriteCount
     )
   })
 }

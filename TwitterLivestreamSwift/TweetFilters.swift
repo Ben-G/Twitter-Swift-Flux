@@ -13,3 +13,9 @@ let Retweets:TweetFilter = {tweets in
     return tweet.type == Tweet.TweetType.Retweet
   }
 }
+
+let Favorited:TweetFilter = {tweets in
+  tweets.filter { tweet in
+    return tweet.favoriteCount > 0
+  }
+}
