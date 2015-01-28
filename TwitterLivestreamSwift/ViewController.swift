@@ -58,14 +58,21 @@ class ViewController: UIViewController {
       
       self!.serverTweets = filteredTweets
       // handle upload
-      syncFavorites(StateMerge(originalList:self!.serverTweets!, localState: self!.localState)).then(body: { syncResult -> () in
+      syncFavorites(StateMerge(originalList:self!.serverTweets!, localState: self!.localState))
+        .then(body: { syncResult -> () in
+        
         switch syncResult {
         case SyncResult.Success(let stateMerge):
+            // store the remainder of local changes that could not be synced
+            // in success case this will always be an empty list
             self!.localState = stateMerge.localState
+            self!.serverTweets = stateMerge.originalList
         case SyncResult.Error(let stateMerge):
+            // store the remainder of local changes that could not be synced
+            // potentially display an error message
             self!.localState = stateMerge.localState
+            self!.serverTweets = stateMerge.originalList
         }
-        return
       })
       
     }
@@ -118,6 +125,3 @@ extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
     tweets = mergeListIntoListLeftPriority([newTweet], tweets!)
   }
 }
-
-
-

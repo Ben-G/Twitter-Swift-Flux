@@ -11,6 +11,17 @@ import Foundation
 import Accounts
 import SwifteriOS
 
+struct StateMerge<T> {
+  let originalList: [T]
+  let localState: [T]
+}
+
+enum SyncResult {
+  case Success(StateMerge<Tweet>)
+  case Error(StateMerge<Tweet>)
+}
+
+
 func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
   return login().then(body: {swifter in
     return loadTweets(swifter, amount)
@@ -27,29 +38,9 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
       login().then(body: {swifter -> () in
         syncPromises = stateMerge.localState.map { tweet -> Promise<Void> in
           if (tweet.isFavorited) {
-            return Promise { fulfill, _ in
-              let tweetId = tweet.identifier.toInt()!
-              swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
-                let index = find(localState, tweet)
-                if let index = index {
-                  originalList = mergeListIntoListLeftPriority(localState, originalList)
-                  localState.removeAtIndex(index)
-                }
-                fulfill()
-                }, failure: { (error) -> Void in })
-            }
+            return syncCreateFavorite(tweet, swifter, &localState, &originalList)
           } else {
-            return Promise { fulfill, _ in
-              let tweetId = tweet.identifier.toInt()!
-              swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
-                let index = find(localState, tweet)
-                if let index = index {
-                  originalList = mergeListIntoListLeftPriority(localState, originalList)
-                  localState.removeAtIndex(index)
-                }
-                fulfill()
-                }, failure: { (error) -> Void in })
-            }
+            return syncDestroyFavorite(tweet, swifter, &localState, &originalList)
           }
         }
         
@@ -60,14 +51,32 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
   }
 }
 
-struct StateMerge<T> {
-  let originalList: [T]
-  let localState: [T]
+private func syncCreateFavorite(tweet:Tweet, swifter:Swifter, inout localState:[Tweet], inout originalList:[Tweet]) -> Promise<Void> {
+  return Promise { fulfill, _ in
+    let tweetId = tweet.identifier.toInt()!
+    swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
+      let index = find(localState, tweet)
+      if let index = index {
+        originalList = mergeListIntoListLeftPriority(localState, originalList)
+        localState.removeAtIndex(index)
+      }
+      fulfill()
+      }, failure: { (error) -> Void in })
+  }
 }
 
-enum SyncResult {
-  case Success(StateMerge<Tweet>)
-  case Error(StateMerge<Tweet>)
+private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter, inout localState:[Tweet], inout originalList:[Tweet]) -> Promise<Void> {
+  return Promise { fulfill, _ in
+    let tweetId = tweet.identifier.toInt()!
+    swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
+      let index = find(localState, tweet)
+      if let index = index {
+        originalList = mergeListIntoListLeftPriority(localState, originalList)
+        localState.removeAtIndex(index)
+      }
+      fulfill()
+      }, failure: { (error) -> Void in })
+  }
 }
 
 private func login() -> Promise<Swifter> {
