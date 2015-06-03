@@ -9,13 +9,14 @@
 import Foundation
 import Alamofire
 import PromiseKit
+import UIKit
 
 func fetchImage(urlString:String) -> Promise<UIImage> {
   let fileName = filenameForURLString(urlString)
   
   if (NSFileManager.defaultManager().fileExistsAtPath(fileName.absoluteString!)) {
     let image = UIImage(contentsOfFile: fileName.absoluteString!)!
-    return Promise(value: image)
+    return Promise(image)
   }
   
   return Promise { (fulfill, reject) in
@@ -48,7 +49,7 @@ private func filenameForURLString(urlString:String) -> NSURL {
   let directoryURL = NSFileManager.defaultManager()
     .URLsForDirectory(.DocumentDirectory,
       inDomains: .UserDomainMask)[0]
-    as NSURL
+    as! NSURL
   
   let fileName = fileNameComponents[fileNameComponents.count - 2] + fileNameComponents[fileNameComponents.count - 1]
   let pathComponent = fileName

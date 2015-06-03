@@ -23,9 +23,9 @@ enum SyncResult {
 
 
 func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
-  return login().then(body: {swifter in
+  return login().then {swifter in
     return loadTweets(swifter, amount)
-  })
+  }
 }
 
 func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
@@ -35,7 +35,7 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
   return Promise { fullfil, _ in
     var syncPromises = [Promise<Void>]()
     
-      login().then(body: {swifter -> () in
+      login().then {swifter -> () in
         syncPromises = stateMerge.localState.map { tweet -> Promise<Void> in
           if (tweet.isFavorited) {
             return syncCreateFavorite(tweet, swifter, &localState, &originalList)
@@ -44,38 +44,38 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
           }
         }
         
-        when(syncPromises).then(body: { results in
+        when(syncPromises).then { results in
           fullfil(SyncResult.Success(StateMerge(originalList: originalList,localState: localState)))
-        })
-      })
+        }
+      }
   }
 }
 
 private func syncCreateFavorite(tweet:Tweet, swifter:Swifter, inout localState:[Tweet], inout originalList:[Tweet]) -> Promise<Void> {
   return Promise { fulfill, _ in
-    let tweetId = tweet.identifier.toInt()!
-    swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
+    let tweetId = tweet.identifier
+    swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { status in
       let index = find(localState, tweet)
       if let index = index {
         originalList = mergeListIntoListLeftPriority(localState, originalList)
         localState.removeAtIndex(index)
       }
       fulfill()
-      }, failure: { (error) -> Void in })
+      }, failure: { error in })
   }
 }
 
 private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter, inout localState:[Tweet], inout originalList:[Tweet]) -> Promise<Void> {
   return Promise { fulfill, _ in
-    let tweetId = tweet.identifier.toInt()!
-    swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { (status) -> Void in
+    let tweetId = tweet.identifier
+    swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { status in
       let index = find(localState, tweet)
       if let index = index {
         originalList = mergeListIntoListLeftPriority(localState, originalList)
         localState.removeAtIndex(index)
       }
       fulfill()
-      }, failure: { (error) -> Void in })
+      }, failure: nil)
   }
 }
 
@@ -86,7 +86,7 @@ private func login() -> Promise<Swifter> {
   return Promise { (fulfiller, _) in
     accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (t:Bool, e:NSError!) -> Void in
       // TODO: check if account actually exists
-      let accounts = accountStore.accountsWithAccountType(accountType) as [ACAccount]
+      let accounts = accountStore.accountsWithAccountType(accountType) as! [ACAccount]
       let swifter = Swifter(account: accounts[0])
       fulfiller(swifter)
     }

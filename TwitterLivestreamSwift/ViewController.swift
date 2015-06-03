@@ -57,9 +57,10 @@ class ViewController: UIViewController {
       }
       
       self!.serverTweets = filteredTweets
+      
       // handle upload
       syncFavorites(StateMerge(originalList:self!.serverTweets!, localState: self!.localState))
-        .then(body: { syncResult -> () in
+        .then { syncResult -> () in
         
         switch syncResult {
         case SyncResult.Success(let stateMerge):
@@ -73,8 +74,7 @@ class ViewController: UIViewController {
             self!.localState = stateMerge.localState
             self!.serverTweets = stateMerge.originalList
         }
-      })
-      
+      }
     }
   }
   
@@ -97,7 +97,7 @@ extension ViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     if let tweets = tweets {
-      let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as TweetTableViewCell
+      let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetTableViewCell
       cell.tweet = tweets[indexPath.row]
       cell.favoriteDelegate = self
       return cell
