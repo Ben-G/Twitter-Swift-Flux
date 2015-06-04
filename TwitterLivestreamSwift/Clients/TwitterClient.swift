@@ -11,6 +11,8 @@ import Foundation
 import Accounts
 import SwifteriOS
 
+var cachedSwifter: Swifter?
+
 struct StateMerge<T> {
   let originalList: [T]
   let localState: [T]
@@ -85,10 +87,28 @@ private func login() -> Promise<Swifter> {
   
   return Promise { (fulfiller, _) in
     accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (t:Bool, e:NSError!) -> Void in
-      // TODO: check if account actually exists
-      let accounts = accountStore.accountsWithAccountType(accountType) as! [ACAccount]
-      let swifter = Swifter(account: accounts[0])
-      fulfiller(swifter)
+      
+      if let cachedSwifter = cachedSwifter {
+        fulfiller(cachedSwifter)
+      } else {
+        let twitterKeysDictionaryURL = NSBundle.mainBundle().URLForResource("TwitterKeys", withExtension: "plist")
+        
+        if twitterKeysDictionaryURL == nil {
+          println("You need to add a TwitterKey.plist with your consumer key and secret!")
+        }
+        
+        let keys = NSDictionary(contentsOfURL: twitterKeysDictionaryURL!)!
+        
+        let swifter = Swifter(consumerKey: keys["consumer_key"] as! String, consumerSecret: keys["consumer_secret"] as! String)
+        
+        swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: { (accessToken, response) -> Void in
+          
+          cachedSwifter = swifter
+          fulfiller(swifter)
+          }, failure: { (error) -> Void in
+            
+        })
+      }
     }
   }
 }

@@ -26,6 +26,7 @@
 		62A07D4D1B1EC4C1001F6916 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D451B1E9DC3001F6916 /* Alamofire.framework */; };
 		62A07D4E1B1EC4C1001F6916 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D451B1E9DC3001F6916 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62A07D501B1EC4DC001F6916 /* OMGHTTPURLRQ.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D461B1E9DC3001F6916 /* OMGHTTPURLRQ.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		62D4385B1B1FFE0900B29312 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62D4385A1B1FFE0900B29312 /* TwitterKeys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		62A07D451B1E9DC3001F6916 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = SOURCE_ROOT; };
 		62A07D461B1E9DC3001F6916 /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		62A07D471B1E9DC3001F6916 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
+		62D4385A1B1FFE0900B29312 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				623AD46B1A74D67900678EFF /* Info.plist */,
+				62D4385A1B1FFE0900B29312 /* TwitterKeys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			files = (
 				623AD6101A7540F000678EFF /* LaunchScreen.xib in Resources */,
 				623AD60F1A7540EB00678EFF /* Main.storyboard in Resources */,
+				62D4385B1B1FFE0900B29312 /* TwitterKeys.plist in Resources */,
 				623AD4741A74D67900678EFF /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

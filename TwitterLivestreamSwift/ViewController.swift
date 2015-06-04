@@ -39,11 +39,11 @@ class ViewController: UIViewController {
     
     loadTweets()
     
-    timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
+//    timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
   }
   
   func loadTweets() {
-    fetchTweets(amount:10).then {[weak self] tweets -> () in
+    fetchTweets(amount:3200).then {[weak self] tweets -> () in
       if self == nil {
         return
       }
