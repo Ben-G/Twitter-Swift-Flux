@@ -16,7 +16,6 @@ class ViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView?
   
   var filters:[TweetFilter]?
-  var timer:NSTimer?
   
   var serverTweets: [Tweet]? {
     didSet {
@@ -38,8 +37,6 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
     loadTweets()
-    
-//    timer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("loadTweets"), userInfo: nil, repeats: true)
   }
   
   func loadTweets() {
@@ -60,23 +57,6 @@ class ViewController: UIViewController {
       
       self!.serverTweets = filteredTweets
       
-      // handle upload
-      syncFavorites(StateMerge(originalList:self!.serverTweets!, localState: self!.localState))
-        .then { syncResult -> () in
-        
-        switch syncResult {
-        case SyncResult.Success(let stateMerge):
-            // store the remainder of local changes that could not be synced
-            // in success case this will always be an empty list
-            self!.localState = stateMerge.localState
-            self!.serverTweets = stateMerge.originalList
-        case SyncResult.Error(let stateMerge):
-            // store the remainder of local changes that could not be synced
-            // potentially display an error message
-            self!.localState = stateMerge.localState
-            self!.serverTweets = stateMerge.originalList
-        }
-      }
     }.catch { error in
       println(error.localizedDescription)
     }
@@ -88,6 +68,14 @@ class ViewController: UIViewController {
       localState[index] = tweet
     } else {
       localState.append(tweet)
+    }
+  }
+  
+  func postFavorites() {
+    // handle upload
+    let stateMerge = StateMerge(originalList:self.serverTweets!, localState: self.localState)
+    syncFavorites(stateMerge).catch { error in
+      println(error)
     }
   }
 
@@ -127,5 +115,9 @@ extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
     
     addTweetChangeToLocalState(newTweet)
     tweets = mergeListIntoListLeftPriority([newTweet], tweets!)
+    
+    postFavorites()
   }
 }
+
+

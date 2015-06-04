@@ -36,7 +36,7 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
   var originalList = stateMerge.originalList
   var localState = stateMerge.localState
   
-  return Promise { fullfil, _ in
+  return Promise { fullfil, reject in
     var syncPromises = [Promise<Void>]()
     
       login().then {swifter -> () in
@@ -50,6 +50,8 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
         
         when(syncPromises).then { results in
           fullfil(SyncResult.Success(StateMerge(originalList: originalList,localState: localState)))
+        }.catch {error in
+          reject(error)
         }
       }
   }
