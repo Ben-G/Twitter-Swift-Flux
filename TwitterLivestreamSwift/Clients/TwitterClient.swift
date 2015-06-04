@@ -25,9 +25,11 @@ enum SyncResult {
 
 
 func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
-  return login().then {swifter in
-    return loadTweets(swifter, amount)
-  }
+  return  login().then { swifter in
+            return loadTweets(swifter, amount)
+          }.then { statuses in
+            parseTweets(statuses)
+          }
 }
 
 func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
@@ -54,7 +56,7 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
 }
 
 private func syncCreateFavorite(tweet:Tweet, swifter:Swifter, inout localState:[Tweet], inout originalList:[Tweet]) -> Promise<Void> {
-  return Promise { fulfill, _ in
+  return Promise { fulfill, reject in
     let tweetId = tweet.identifier
     swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { status in
       let index = find(localState, tweet)
@@ -63,12 +65,12 @@ private func syncCreateFavorite(tweet:Tweet, swifter:Swifter, inout localState:[
         localState.removeAtIndex(index)
       }
       fulfill()
-      }, failure: { error in })
+      }, failure: { error in reject(error) })
   }
 }
 
 private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter, inout localState:[Tweet], inout originalList:[Tweet]) -> Promise<Void> {
-  return Promise { fulfill, _ in
+  return Promise { fulfill, reject in
     let tweetId = tweet.identifier
     swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { status in
       let index = find(localState, tweet)
@@ -77,7 +79,7 @@ private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter, inout localState:
         localState.removeAtIndex(index)
       }
       fulfill()
-      }, failure: nil)
+      }, failure: { error in reject(error) })
   }
 }
 
@@ -113,13 +115,13 @@ private func login() -> Promise<Swifter> {
   }
 }
 
-private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[Tweet]> {
-  return Promise { (fulfiller, _) in
+private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[JSONValue]> {
+  return Promise { (fulfiller, reject) in
 
     swifter.getStatusesHomeTimelineWithCount(amount, sinceID: nil, maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: nil, success: { (statuses) -> Void in
-        fulfiller(parseTweets(statuses!))
-      }, failure: { (error) -> Void in
-    })
+        fulfiller(statuses!)
+      }, failure: { error in reject(error) }
+    )
   }
 }
 

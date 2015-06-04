@@ -48,6 +48,8 @@ class ViewController: UIViewController {
         return
       }
       
+      let counts = TwitterMetrics.countWordsInTweets(tweets)
+      
       var filteredTweets = tweets
       
       if let filters = self!.filters {
@@ -75,6 +77,8 @@ class ViewController: UIViewController {
             self!.serverTweets = stateMerge.originalList
         }
       }
+    }.catch { error in
+      println(error.localizedDescription)
     }
   }
   

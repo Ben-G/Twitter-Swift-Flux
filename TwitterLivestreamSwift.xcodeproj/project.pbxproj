@@ -27,6 +27,7 @@
 		62A07D4E1B1EC4C1001F6916 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D451B1E9DC3001F6916 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62A07D501B1EC4DC001F6916 /* OMGHTTPURLRQ.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D461B1E9DC3001F6916 /* OMGHTTPURLRQ.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62D4385B1B1FFE0900B29312 /* TwitterKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62D4385A1B1FFE0900B29312 /* TwitterKeys.plist */; };
+		62D438611B200A8500B29312 /* TwitterMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D438601B200A8500B29312 /* TwitterMetrics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		62A07D461B1E9DC3001F6916 /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = SOURCE_ROOT; };
 		62A07D471B1E9DC3001F6916 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = SOURCE_ROOT; };
 		62D4385A1B1FFE0900B29312 /* TwitterKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TwitterKeys.plist; sourceTree = "<group>"; };
+		62D438601B200A8500B29312 /* TwitterMetrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterMetrics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 			children = (
 				6274B2B91A76CCEC0010BC8A /* TwitterClient.swift */,
 				6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */,
+				62D438601B200A8500B29312 /* TwitterMetrics.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				6274B2A41A7542170010BC8A /* Tweet.swift in Sources */,
 				6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */,
 				6274B2A91A76A41B0010BC8A /* TweetTableViewCell.swift in Sources */,
+				62D438611B200A8500B29312 /* TwitterMetrics.swift in Sources */,
 				6274B2BE1A7701F30010BC8A /* TweetFilters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
