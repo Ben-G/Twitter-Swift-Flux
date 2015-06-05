@@ -11,9 +11,9 @@ import SwifteriOS
 
 class TimelineViewController: UIViewController {
 
-  @IBOutlet weak var tableView: UITableView?
+  @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var wordCountLabel: UILabel!
-
+  var refreshControl: UIRefreshControl!
   
   var filter:TweetFilter = { $0 } {
     didSet {
@@ -39,8 +39,16 @@ class TimelineViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    refreshControl = UIRefreshControl()
+    tableView.insertSubview(refreshControl, atIndex:0)
     
+    refreshControl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
     loadTweets()
+  }
+  
+  func refresh() {
+    loadTweets()
+    refreshControl.endRefreshing()
   }
   
   func loadTweets() {
