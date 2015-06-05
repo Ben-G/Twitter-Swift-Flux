@@ -15,11 +15,15 @@ class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView?
   
-  var filters:[TweetFilter]?
+  var filter:TweetFilter = { $0 } {
+    didSet {
+      tweets = filter(mergeListIntoListLeftPriority(localState, serverTweets!))
+    }
+  }
   
   var serverTweets: [Tweet]? {
     didSet {
-      tweets = mergeListIntoListLeftPriority(localState, serverTweets!)
+      tweets = filter(mergeListIntoListLeftPriority(localState, serverTweets!))
     }
   }
   
@@ -40,22 +44,14 @@ class ViewController: UIViewController {
   }
   
   func loadTweets() {
-    fetchTweets(amount:3200).then {[weak self] tweets -> () in
+    fetchTweets(amount:800).then {[weak self] tweets -> () in
       if self == nil {
         return
       }
       
       let counts = TwitterMetrics.countWordsInTweets(tweets)
       
-      var filteredTweets = tweets
-      
-      if let filters = self!.filters {
-        for Filter in filters {
-          filteredTweets = Filter(filteredTweets)
-        }
-      }
-      
-      self!.serverTweets = filteredTweets
+      self!.serverTweets = tweets
       
     }.catch { error in
       println(error.localizedDescription)
@@ -131,6 +127,23 @@ extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
     
     postFavorites()
   }
+}
+
+extension ViewController {
+  
+  
+  @IBAction func retweetsButtonTapped(sender: AnyObject) {
+    filter = Retweets
+  }
+  
+  @IBAction func favoritedButtonTapped(sender: AnyObject) {
+    filter = Favorited
+  }
+  
+  @IBAction func allTweetsButtonTapped(sender: AnyObject) {
+    filter = { $0 }
+  }
+  
 }
 
 
