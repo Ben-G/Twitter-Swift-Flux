@@ -37,7 +37,7 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
   var localState = stateMerge.localState
   
   return Promise { fullfil, reject in
-    var syncPromises = [Promise<Tweet?>]()
+    var syncPromises = [Promise<(Tweet?, NSError?)>]()
     
       login().then {swifter -> () in
         syncPromises = stateMerge.localState.map { tweet in
@@ -48,17 +48,25 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
           }
         }
         
-        when(syncPromises).then { results in
+        when(syncPromises).then { results -> () in
           
-//          for tweet in results {
-//            if let tweet = tweet as! Tweet {
-//              let index = find(localState, tweet)
-//              if let index = index {
-//                originalList = mergeListIntoListLeftPriority(localState, originalList)
-//                localState.removeAtIndex(index)
-//              }
-//            }
-//          }
+          for result in results {
+            
+            switch result {
+            case (let resultTweet, nil):
+              let index = find(localState, resultTweet!)
+              if let index = index {
+                originalList = mergeListIntoListLeftPriority(localState, originalList)
+                localState.removeAtIndex(index)
+              }
+            case (nil, let error):
+              println("one operation failed")
+            default:
+              println("one operation failed")
+            }
+            
+            
+          }
           
           //TODO: update local and original state here
           
@@ -70,21 +78,23 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
   }
 }
 
-private func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<Tweet?> {
+private func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
   return Promise { fulfill, reject in
     let tweetId = tweet.identifier
     swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { status in
-      fulfill(tweet)
+      fulfill(tweet, nil)
     }, failure: { error in reject(error) })
   }
 }
 
-private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter) -> Promise<Tweet?> {
+private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
   return Promise { fulfill, reject in
     let tweetId = tweet.identifier
     swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { status in
-      fulfill(tweet)
-    }, failure: { error in reject(error) })
+      fulfill(tweet, nil)
+    }, failure: { error in
+      fulfill(nil,error)
+    })
   }
 }
 

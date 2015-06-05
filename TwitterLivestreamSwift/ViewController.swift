@@ -74,8 +74,21 @@ class ViewController: UIViewController {
   func postFavorites() {
     // handle upload
     let stateMerge = StateMerge(originalList:self.serverTweets!, localState: self.localState)
-    syncFavorites(stateMerge).catch { error in
-      println(error)
+  
+    syncFavorites(StateMerge(originalList:serverTweets!, localState: localState))
+      .then{ syncResult -> () in
+        switch syncResult {
+        case SyncResult.Success(let stateMerge):
+          // store the remainder of local changes that could not be synced
+          // in success case this will always be an empty list
+          self.localState = stateMerge.localState
+          self.serverTweets = stateMerge.originalList
+        case SyncResult.Error(let stateMerge):
+          // store the remainder of local changes that could not be synced
+          // potentially display an error message
+          self.localState = stateMerge.localState
+          self.serverTweets = stateMerge.originalList
+        }
     }
   }
 
