@@ -14,7 +14,7 @@ struct TwitterMetrics {
     var wordCounts = [String : Int]()
     
     for tweet in tweets {
-      let words = split(tweet.content) { $0 == " "}
+      let words = split(tweet.content) { $0 == " "}.filter{ count($0) > 5 }
       for word in words {
         // increase count by 1, or set initially to 1 if first ocurrence of word
         wordCounts[word] = (wordCounts[word] ?? 0) + 1

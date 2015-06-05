@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Timeline View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TwitterLivestreamSwift" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TimelineViewController" customModule="TwitterLivestreamSwift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="92" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dCs-gK-Eam">
-                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                                <rect key="frame" x="0.0" y="100" width="600" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tweetCell" rowHeight="92" id="KMG-fu-aiZ" customClass="TweetTableViewCell" customModule="TwitterLivestreamSwift" customModuleProvider="target">
@@ -159,11 +159,15 @@
                                         <state key="normal" title="WordCount">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="wordCountButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ogf-rr-Ziu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="g0P-tI-nb2" firstAttribute="leading" secondItem="eOz-ns-g1f" secondAttribute="trailing" constant="34" id="AmS-2J-uAq"/>
                                     <constraint firstAttribute="centerY" secondItem="eOz-ns-g1f" secondAttribute="centerY" constant="-0.5" id="BVZ-3s-rox"/>
+                                    <constraint firstAttribute="trailing" secondItem="rty-U9-z30" secondAttribute="trailing" constant="20" id="EHO-a3-wC8"/>
                                     <constraint firstAttribute="centerY" secondItem="g0P-tI-nb2" secondAttribute="centerY" constant="-0.5" id="Kap-Lv-btA"/>
                                     <constraint firstAttribute="height" constant="87" id="QJX-Ah-qIA"/>
                                     <constraint firstAttribute="centerY" secondItem="rty-U9-z30" secondAttribute="centerY" constant="-0.5" id="UFL-bv-1x7"/>
@@ -175,19 +179,36 @@
                                     <constraint firstItem="0tl-I2-QHg" firstAttribute="leading" secondItem="g0P-tI-nb2" secondAttribute="trailing" constant="36" id="vyS-8H-wHi"/>
                                     <constraint firstAttribute="bottom" secondItem="eOz-ns-g1f" secondAttribute="bottom" constant="28" id="xc2-i1-3CU"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Vw9-vW-YnO"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not counted yet..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4z-pJ-nvH">
+                                <rect key="frame" x="16" y="566" width="568" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="p4q-Sq-cjF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tf6-bb-8f5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="1h2-9P-qby"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="2tb-Kz-3BZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="T4z-pJ-nvH" secondAttribute="trailing" id="6fs-2g-wng"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="90M-0V-M7F"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="T4z-pJ-nvH" secondAttribute="bottom" constant="10" id="AuW-NY-ZGF"/>
                             <constraint firstItem="dCs-gK-Eam" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EBP-Xh-fXT"/>
                             <constraint firstItem="Tf6-bb-8f5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="H3Y-J1-SIT"/>
                             <constraint firstAttribute="trailing" secondItem="Tf6-bb-8f5" secondAttribute="trailing" id="Lc0-KH-nlN"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCs-gK-Eam" secondAttribute="bottom" id="Q37-ty-KWX"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dCs-gK-Eam" secondAttribute="bottom" constant="40" id="Q37-ty-KWX"/>
                             <constraint firstAttribute="trailing" secondItem="dCs-gK-Eam" secondAttribute="trailing" id="Tak-ca-uiO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Tf6-bb-8f5" secondAttribute="trailing" id="izq-6I-PeH"/>
+                            <constraint firstItem="T4z-pJ-nvH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="m8c-Og-FsN"/>
                             <constraint firstItem="Tf6-bb-8f5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="zPi-re-f25"/>
                         </constraints>
                         <variation key="default">
@@ -200,6 +221,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="dCs-gK-Eam" id="GHQ-Br-cWy"/>
+                        <outlet property="wordCountLabel" destination="T4z-pJ-nvH" id="lRD-Lw-GXh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

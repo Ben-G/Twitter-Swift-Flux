@@ -9,11 +9,11 @@
 import UIKit
 import SwifteriOS
 
-typealias TweetFilter = [Tweet] -> [Tweet]
-
-class ViewController: UIViewController {
+class TimelineViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView?
+  @IBOutlet weak var wordCountLabel: UILabel!
+
   
   var filter:TweetFilter = { $0 } {
     didSet {
@@ -48,8 +48,6 @@ class ViewController: UIViewController {
       if self == nil {
         return
       }
-      
-      let counts = TwitterMetrics.countWordsInTweets(tweets)
       
       self!.serverTweets = tweets
       
@@ -90,7 +88,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UITableViewDataSource {
+extension TimelineViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets?.count ?? 0
@@ -108,7 +106,7 @@ extension ViewController: UITableViewDataSource {
   }
 }
 
-extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
+extension TimelineViewController : TweetTableViewCellFavoriteDelegateProtocol {
   
   func didFavorite(tweetTableViewCell:TweetTableViewCell) {
     let currentTweet = tweetTableViewCell.tweet!
@@ -129,8 +127,7 @@ extension ViewController : TweetTableViewCellFavoriteDelegateProtocol {
   }
 }
 
-extension ViewController {
-  
+extension TimelineViewController {
   
   @IBAction func retweetsButtonTapped(sender: AnyObject) {
     filter = Retweets
@@ -142,6 +139,18 @@ extension ViewController {
   
   @IBAction func allTweetsButtonTapped(sender: AnyObject) {
     filter = { $0 }
+  }
+  
+  @IBAction func wordCountButtonTapped(sender: AnyObject) {
+    wordCountLabel.text = "Counting ..."
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+      let counts = TwitterMetrics.countWordsInTweets(self.tweets!)
+      let (word, count) = counts[0]
+      dispatch_async(dispatch_get_main_queue()) {
+        self.wordCountLabel.text = "Most frequent word: \(word); \(count) times"
+      }
+    })
   }
   
 }

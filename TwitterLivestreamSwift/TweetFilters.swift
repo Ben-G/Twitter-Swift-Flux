@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias TweetFilter = [Tweet] -> [Tweet]
+
 let Retweets:TweetFilter = {tweets in
   tweets.filter { tweet in
     return tweet.type == Tweet.TweetType.Retweet
