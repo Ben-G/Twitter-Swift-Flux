@@ -25,19 +25,3 @@ struct Tweet : Equatable {
 func ==(lhs: Tweet, rhs: Tweet) -> Bool {
   return lhs.identifier == rhs.identifier
 }
-
-func mergeListIntoListLeftPriority <T : Equatable> (leftList:[T], rightList:[T]) -> [T] {
-  var mergedList = [T]()
-  mergedList = rightList
-  
-  mergedList = mergedList.map({ entry -> T in
-    let index = find(leftList, entry)
-    if let index = index {
-      return leftList[index]
-    } else {
-      return entry
-    }
-  })
-  
-  return mergedList
-}

@@ -14,16 +14,13 @@ class TimelineViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var wordCountLabel: UILabel!
   var refreshControl: UIRefreshControl!
+
+  var store: TweetStore = TweetStore()
   
   var filter:TweetFilter = { $0 } {
     didSet {
-      tweets = filter(mergeListIntoListLeftPriority(localState, serverTweets!))
-    }
-  }
-  
-  var serverTweets: [Tweet]? {
-    didSet {
-      tweets = filter(mergeListIntoListLeftPriority(localState, serverTweets!))
+      tweets = filter(store.tweets!)
+      self.tableView?.reloadData()
     }
   }
   
@@ -34,66 +31,25 @@ class TimelineViewController: UIViewController {
       }
     }
   }
-  
-  var localState: [Tweet] = []
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     refreshControl = UIRefreshControl()
     tableView.insertSubview(refreshControl, atIndex:0)
     
     refreshControl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
-    loadTweets()
+    store.loadTweets().then { tweets in
+      self.tweets = tweets
+    }
   }
   
   func refresh() {
-    loadTweets()
+    store.loadTweets().then { tweets in
+      self.tweets = tweets
+    }
+
     refreshControl.endRefreshing()
   }
-  
-  func loadTweets() {
-    fetchTweets(amount:800).then {[weak self] tweets -> () in
-      if self == nil {
-        return
-      }
-      
-      self!.serverTweets = tweets
-      
-    }.catch { error in
-      println(error.localizedDescription)
-    }
-  }
-  
-  func addTweetChangeToLocalState(tweet: Tweet) {
-    let index = find(localState, tweet)
-    if let index = index {
-      localState[index] = tweet
-    } else {
-      localState.append(tweet)
-    }
-  }
-  
-  func postFavorites() {
-    // handle upload
-    let stateMerge = StateMerge(originalList:self.serverTweets!, localState: self.localState)
-  
-    syncFavorites(StateMerge(originalList:serverTweets!, localState: localState))
-      .then{ syncResult -> () in
-        switch syncResult {
-        case SyncResult.Success(let stateMerge):
-          // store the remainder of local changes that could not be synced
-          // in success case this will always be an empty list
-          self.localState = stateMerge.localState
-          self.serverTweets = stateMerge.originalList
-        case SyncResult.Error(let stateMerge):
-          // store the remainder of local changes that could not be synced
-          // potentially display an error message
-          self.localState = stateMerge.localState
-          self.serverTweets = stateMerge.originalList
-        }
-    }
-  }
-
 }
 
 extension TimelineViewController: UITableViewDataSource {
@@ -128,10 +84,8 @@ extension TimelineViewController : TweetTableViewCellFavoriteDelegateProtocol {
       isFavorited: !currentTweet.isFavorited
     )
     
-    addTweetChangeToLocalState(newTweet)
-    tweets = mergeListIntoListLeftPriority([newTweet], tweets!)
-    
-    postFavorites()
+    store.addTweetChangeToLocalState(newTweet)
+    tweets = store.tweets
   }
 }
 
