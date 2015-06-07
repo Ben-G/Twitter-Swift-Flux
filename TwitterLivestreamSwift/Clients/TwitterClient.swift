@@ -13,32 +13,16 @@ import SwifteriOS
 
 var cachedSwifter: Swifter?
 
-struct StateMerge<T> {
-  let originalList: [T]
-  let localState: [T]
-}
 
-enum SyncResult {
-  case Success(StateMerge<Tweet>)
-  case Error(StateMerge<Tweet>)
-}
+struct TwitterClient : StoreSync {
 
-
-func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
-  return  login().then { swifter in
-            return loadTweets(swifter, amount)
-          }.then { statuses in
-            parseTweets(statuses)
-          }
-}
-
-func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
-  var originalList = stateMerge.originalList
-  var localState = stateMerge.localState
-  
-  return Promise { fullfil, reject in
-    var syncPromises = [Promise<(Tweet?, NSError?)>]()
+  static func syncLocalState(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult<Tweet>> {
+    var originalList = stateMerge.originalList
+    var localState = stateMerge.localState
     
+    return Promise { fullfil, reject in
+      var syncPromises = [Promise<(Tweet?, NSError?)>]()
+      
       login().then {swifter -> () in
         syncPromises = stateMerge.localState.map { tweet in
           if (tweet.isFavorited) {
@@ -73,11 +57,27 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
           //TODO: update local and original state here
           
           fullfil(SyncResult.Success(StateMerge(originalList: originalList, localState: localState)))
-        }.catch {error in
-          reject(error)
+          }.catch {error in
+            reject(error)
         }
       }
+    }
   }
+
+  
+}
+
+
+func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
+  return  login().then { swifter in
+            return loadTweets(swifter, amount)
+          }.then { statuses -> [Tweet] in
+            if let statuses = statuses {
+              return parseTweets(statuses)
+            } else {
+              return [Tweet]()
+            }
+          }
 }
 
 private func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
@@ -132,11 +132,11 @@ private func login() -> Promise<Swifter> {
   }
 }
 
-private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[JSONValue]> {
+private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[JSONValue]?> {
   return Promise { (fulfiller, reject) in
 
     swifter.getStatusesHomeTimelineWithCount(amount, sinceID: nil, maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: nil, success: { (statuses) -> Void in
-        fulfiller(statuses!)
+        fulfiller(statuses)
       }, failure: { error in reject(error) }
     )
   }

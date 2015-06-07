@@ -10,14 +10,18 @@ import Foundation
 
 typealias TweetFilter = [Tweet] -> [Tweet]
 
-let Retweets:TweetFilter = {tweets in
-  tweets.filter { tweet in
-    return tweet.type == Tweet.TweetType.Retweet
+struct TweetFilters {
+  static let retweets: TweetFilter = {tweets in
+    tweets.filter { tweet in
+      return tweet.type == Tweet.TweetType.Retweet
+    }
   }
-}
 
-let Favorited:TweetFilter = {tweets in
-  tweets.filter { tweet in
-    return tweet.favoriteCount > 0
+  static let favorited: TweetFilter = {tweets in
+    tweets.filter { tweet in
+      return tweet.favoriteCount > 0
+    }
   }
+
+  static let all: TweetFilter = { $0 }
 }

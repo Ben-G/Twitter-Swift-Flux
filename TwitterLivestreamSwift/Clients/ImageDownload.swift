@@ -11,6 +11,8 @@ import Alamofire
 import PromiseKit
 import UIKit
 
+private let errorDomain = "de.benjamin-encz.twitterswift"
+
 func fetchImage(urlString:String) -> (Promise<UIImage>, Request?) {
   let fileName = filenameForURLString(urlString)
   
@@ -32,10 +34,10 @@ func fetchImage(urlString:String) -> (Promise<UIImage>, Request?) {
         if let image = image {
           fulfill(image)
         } else {
-          reject(NSError(domain: "", code: 0, userInfo: nil))
+          reject(NSError(domain: errorDomain, code: 0, userInfo: nil))
         }
       } else {
-        reject(NSError(domain: "", code: 0, userInfo: nil))
+        reject(NSError(domain: errorDomain, code: 1, userInfo: nil))
       }
       
       return url

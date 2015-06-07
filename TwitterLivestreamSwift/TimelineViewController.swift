@@ -17,21 +17,30 @@ class TimelineViewController: UIViewController {
 
   var store: TweetStore = TweetStore()
   
-  var filter:TweetFilter = { $0 } {
+  var filter:TweetFilter = TweetFilters.all {
     didSet {
-      tweets = filter(store.tweets!)
-      self.tableView?.reloadData()
+      tableView?.reloadData()
     }
   }
   
   var tweets: [Tweet]? {
     didSet {
       if let tweets = tweets {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
       }
     }
   }
-    
+  
+  var displayedTweets: [Tweet] {
+    get {
+      if let tweets = tweets {
+        return filter(tweets)
+      } else {
+        return []
+      }
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     refreshControl = UIRefreshControl()
@@ -55,13 +64,13 @@ class TimelineViewController: UIViewController {
 extension TimelineViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tweets?.count ?? 0
+    return displayedTweets.count ?? 0
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     if let tweets = tweets {
       let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetTableViewCell
-      cell.tweet = tweets[indexPath.row]
+      cell.tweet = displayedTweets[indexPath.row]
       cell.favoriteDelegate = self
       return cell
     } else {
@@ -85,6 +94,7 @@ extension TimelineViewController : TweetTableViewCellFavoriteDelegateProtocol {
     )
     
     store.addTweetChangeToLocalState(newTweet)
+    store.syncLocalState()
     tweets = store.tweets
   }
 }
@@ -92,15 +102,15 @@ extension TimelineViewController : TweetTableViewCellFavoriteDelegateProtocol {
 extension TimelineViewController {
   
   @IBAction func retweetsButtonTapped(sender: AnyObject) {
-    filter = Retweets
+    filter = TweetFilters.retweets
   }
   
   @IBAction func favoritedButtonTapped(sender: AnyObject) {
-    filter = Favorited
+    filter = TweetFilters.favorited
   }
   
   @IBAction func allTweetsButtonTapped(sender: AnyObject) {
-    filter = { $0 }
+    filter = TweetFilters.all
   }
   
   @IBAction func wordCountButtonTapped(sender: AnyObject) {

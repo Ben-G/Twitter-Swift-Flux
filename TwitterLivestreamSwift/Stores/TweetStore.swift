@@ -9,6 +9,22 @@
 import Foundation
 import PromiseKit
 
+struct StateMerge <T> {
+  let originalList: [T]
+  let localState: [T]
+}
+
+enum SyncResult <T> {
+  case Success(StateMerge<T>)
+  case Error(StateMerge<T>)
+}
+
+protocol StoreSync {
+  typealias StoreType
+  
+  static func syncLocalState(merge: StateMerge<StoreType>) -> Promise<SyncResult<StoreType>>
+}
+
 class TweetStore {
  
   var tweets: [Tweet]? {
@@ -39,15 +55,13 @@ class TweetStore {
     } else {
       localState.append(tweet)
     }
-    
-    postFavorites()
   }
   
-  func postFavorites() {
+  func syncLocalState() {
     // handle upload
     let stateMerge = StateMerge(originalList:self.serverTweets, localState: self.localState)
     
-    syncFavorites(StateMerge(originalList:serverTweets, localState: localState))
+    TwitterClient.syncLocalState(StateMerge(originalList:serverTweets, localState: localState))
       .then{ syncResult -> () in
         switch syncResult {
         case SyncResult.Success(let stateMergeResult):
