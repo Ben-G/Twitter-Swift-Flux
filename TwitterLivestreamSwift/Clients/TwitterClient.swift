@@ -54,15 +54,17 @@ func syncFavorites(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult> {
             
             switch result {
             case (let resultTweet, nil):
-              let index = find(localState, resultTweet!)
-              if let index = index {
-                originalList = mergeListIntoListLeftPriority(localState, originalList)
-                localState.removeAtIndex(index)
+              if let resultTweet = resultTweet {
+                let index = find(localState, resultTweet)
+                if let index = index {
+                  originalList = mergeListIntoListLeftPriority(localState, originalList)
+                  localState.removeAtIndex(index)
+                }
               }
             case (nil, let error):
-              println("one operation failed")
+              println("One operation failed")
             default:
-              println("one operation failed")
+              println("Something unexpected happened")
             }
             
             

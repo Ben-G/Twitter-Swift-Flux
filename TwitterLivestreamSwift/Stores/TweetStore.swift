@@ -13,22 +13,17 @@ class TweetStore {
  
   var tweets: [Tweet]? {
     get {
-      return mergeListIntoListLeftPriority(localState, serverTweets!)
+      return mergeListIntoListLeftPriority(localState, serverTweets)
     }
   }
   
-  var serverTweets: [Tweet]?
-  
+  private var serverTweets: [Tweet] = []
   private var localState: [Tweet] = []
 
   func loadTweets() -> Promise<[Tweet]> {
     return Promise { fulfill, reject in
-      fetchTweets(amount:800).then {[weak self] tweets -> () in
-        if self == nil {
-          return
-        }
-        
-        self!.serverTweets = tweets
+      fetchTweets(amount:800).then {[unowned self] tweets -> () in
+        self.serverTweets = tweets
         fulfill(tweets)
       }.catch { error in
         println(error.localizedDescription)
@@ -50,21 +45,21 @@ class TweetStore {
   
   func postFavorites() {
     // handle upload
-    let stateMerge = StateMerge(originalList:self.serverTweets!, localState: self.localState)
+    let stateMerge = StateMerge(originalList:self.serverTweets, localState: self.localState)
     
-    syncFavorites(StateMerge(originalList:serverTweets!, localState: localState))
+    syncFavorites(StateMerge(originalList:serverTweets, localState: localState))
       .then{ syncResult -> () in
         switch syncResult {
-        case SyncResult.Success(let stateMerge):
+        case SyncResult.Success(let stateMergeResult):
           // store the remainder of local changes that could not be synced
           // in success case this will always be an empty list
-          self.localState = stateMerge.localState
-          self.serverTweets = stateMerge.originalList
-        case SyncResult.Error(let stateMerge):
+          self.localState = stateMergeResult.localState
+          self.serverTweets = stateMergeResult.originalList
+        case SyncResult.Error(let stateMergeResult):
           // store the remainder of local changes that could not be synced
           // potentially display an error message
-          self.localState = stateMerge.localState
-          self.serverTweets = stateMerge.originalList
+          self.localState = stateMergeResult.localState
+          self.serverTweets = stateMergeResult.originalList
         }
     }
   }

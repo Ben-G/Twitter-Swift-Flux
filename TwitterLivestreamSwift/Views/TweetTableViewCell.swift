@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 protocol TweetTableViewCellFavoriteDelegateProtocol : class {
   func didFavorite(tweetTableViewCell:TweetTableViewCell)
@@ -19,7 +20,8 @@ class TweetTableViewCell: UITableViewCell {
   @IBOutlet weak var userNameLabel: UILabel!
   @IBOutlet weak var contentLabel: UILabel!
   
-  weak var favoriteDelegate:TweetTableViewCellFavoriteDelegateProtocol?
+  weak var favoriteDelegate: TweetTableViewCellFavoriteDelegateProtocol?
+  weak var currentImageRequest: Request?
   
   var tweet:Tweet? {
     didSet {
@@ -39,7 +41,11 @@ class TweetTableViewCell: UITableViewCell {
         userNameLabel.text = tweet.user.name
         contentLabel.text = tweet.content
         
-        let imageDownloadPromise = fetchImage(tweet.user.profileImageURL)
+        // cancel any previous request that might be going on
+        currentImageRequest?.cancel()
+        
+        let (imageDownloadPromise, imageRequest) = fetchImage(tweet.user.profileImageURL)
+        currentImageRequest = imageRequest
         
         imageDownloadPromise.then { [weak self] image -> () in
           if let nonOptionalSelf = self {

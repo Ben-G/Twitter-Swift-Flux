@@ -11,36 +11,40 @@ import Alamofire
 import PromiseKit
 import UIKit
 
-func fetchImage(urlString:String) -> Promise<UIImage> {
+func fetchImage(urlString:String) -> (Promise<UIImage>, Request?) {
   let fileName = filenameForURLString(urlString)
   
   if (NSFileManager.defaultManager().fileExistsAtPath(fileName.absoluteString!)) {
     let image = UIImage(contentsOfFile: fileName.absoluteString!)!
-    return Promise(image)
+    return (Promise(image), nil)
   }
   
-  return Promise { (fulfill, reject) in
-    Alamofire.download(.GET, urlString, { (temporaryURL, response) in
-    
+  var request: Request?
+  
+  var promise = Promise<UIImage> { (fulfill, reject) in
+    request = Alamofire.download(.GET, urlString, { (temporaryURL, response) in
+      
       let url = filenameForURLString(urlString)
       let imageData = NSData(contentsOfURL:url)
       
       if let imageData = imageData {
         let image = UIImage(data: imageData)
-          if let image = image {
-            fulfill(image)
-          } else {
-            reject(NSError(domain: "", code: 0, userInfo: nil))
-          }
+        if let image = image {
+          fulfill(image)
         } else {
           reject(NSError(domain: "", code: 0, userInfo: nil))
         }
-            
-        return url
+      } else {
+        reject(NSError(domain: "", code: 0, userInfo: nil))
+      }
+      
+      return url
     })
     
     return
   }
+  
+  return (promise, request)
 }
 
 private func filenameForURLString(urlString:String) -> NSURL {
