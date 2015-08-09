@@ -50,14 +50,12 @@ struct TwitterClient : StoreSync {
             default:
               println("Something unexpected happened")
             }
-            
-            
           }
           
           //TODO: update local and original state here
           
           fullfil(SyncResult.Success(StateMerge(originalList: originalList, localState: localState)))
-          }.catch {error in
+        }.catch {error in
             reject(error)
         }
       }

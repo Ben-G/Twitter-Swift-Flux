@@ -25,11 +25,19 @@ protocol StoreSync {
   static func syncLocalState(merge: StateMerge<StoreType>) -> Promise<SyncResult<StoreType>>
 }
 
+let storeQueue = dispatch_queue_create("de.benjamin-encz.twitterswift", nil)
+
 class TweetStore {
  
   var tweets: [Tweet]? {
     get {
-      return mergeListIntoListLeftPriority(localState, serverTweets)
+      var mergedList: [Tweet]? = nil
+
+      dispatch_sync(storeQueue) {
+        mergedList = mergeListIntoListLeftPriority(self.localState, self.serverTweets)
+      }
+      
+      return mergedList
     }
   }
   
@@ -49,11 +57,13 @@ class TweetStore {
   }
   
   func addTweetChangeToLocalState(tweet: Tweet) {
-    let index = find(localState, tweet)
-    if let index = index {
-      localState[index] = tweet
-    } else {
-      localState.append(tweet)
+    dispatch_sync(storeQueue) {
+      let index = find(self.localState, tweet)
+      if let index = index {
+        self.localState[index] = tweet
+      } else {
+        self.localState.append(tweet)
+      }
     }
   }
   

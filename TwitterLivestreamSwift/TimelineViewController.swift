@@ -33,11 +33,7 @@ class TimelineViewController: UIViewController {
   
   var displayedTweets: [Tweet] {
     get {
-      if let tweets = tweets {
-        return filter(tweets)
-      } else {
-        return []
-      }
+      return tweets.map(self.filter) ?? []
     }
   }
   
@@ -57,6 +53,10 @@ class TimelineViewController: UIViewController {
       self.tweets = tweets
     }
 
+    let view = UIView()
+    view.frame.size.height += 20
+    println(view.frame)
+    
     refreshControl.endRefreshing()
   }
 }
