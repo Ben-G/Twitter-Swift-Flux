@@ -10,6 +10,7 @@ import PromiseKit
 import Foundation
 import Accounts
 import SwifteriOS
+import UIKit
 
 var cachedSwifter: Swifter?
 
@@ -143,7 +144,7 @@ private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[JSONValue]?> {
 private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
   return tweets.map({ tweet in
     let user = User (
-      profileImageURL:tweet["user"]["profile_image_url"].string!,
+      profileImageURL: profilePictureURLForCurrentDeviceType(tweet),
       identifier: tweet["user"]["id_str"].string!,
       name: tweet["user"]["name"].string!
     )
@@ -169,4 +170,18 @@ private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
       isFavorited: favorited
     )
   })
+}
+
+
+private func profilePictureURLForCurrentDeviceType(tweet: JSONValue) -> String {
+    var regularPictureURL = tweet["user"]["profile_image_url_https"].string!
+    
+    if (UIScreen.mainScreen().scale >= 2.0) {
+        var largePictureURL = (regularPictureURL as NSString).mutableCopy() as! NSMutableString
+        largePictureURL.replaceOccurrencesOfString("_normal.png", withString: "_bigger.png", options: NSStringCompareOptions.BackwardsSearch, range: NSRange(location: 0, length: largePictureURL.length))
+
+        return largePictureURL as String
+    } else {
+        return regularPictureURL
+    }
 }
