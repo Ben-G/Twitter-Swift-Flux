@@ -49,6 +49,7 @@ class TweetTableViewCell: UITableViewCell {
         
         imageDownloadPromise.then { [weak self] image -> () in
           if let nonOptionalSelf = self {
+            // only apply image if it's still relevant for this cell
             if (nonOptionalSelf.tweet?.identifier == tweet.identifier) {
               nonOptionalSelf.profilePictureImageView.image = image
             }

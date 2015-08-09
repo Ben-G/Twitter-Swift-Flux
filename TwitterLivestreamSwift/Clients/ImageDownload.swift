@@ -27,7 +27,7 @@ func fetchImage(urlString:String) -> (Promise<UIImage>, Request?) {
     request = Alamofire.download(.GET, urlString, { (temporaryURL, response) in
       
       let url = filenameForURLString(urlString)
-      let imageData = NSData(contentsOfURL:url)
+      let imageData = NSData(contentsOfURL:temporaryURL)
       
       if let imageData = imageData {
         let image = UIImage(data: imageData)
