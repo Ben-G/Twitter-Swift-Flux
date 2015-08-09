@@ -120,7 +120,7 @@ private func login() -> Promise<Swifter> {
         let swifter = Swifter(consumerKey: keys["consumer_key"] as! String, consumerSecret: keys["consumer_secret"] as! String)
         
         swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: { (accessToken, response) -> Void in
-          
+          // TODO: cache access token here
           cachedSwifter = swifter
           fulfiller(swifter)
           }, failure: { (error) -> Void in
