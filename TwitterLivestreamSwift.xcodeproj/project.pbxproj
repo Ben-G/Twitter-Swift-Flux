@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62371D391B7C2DBC0066C2C9 /* TimelineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D381B7C2DBC0066C2C9 /* TimelineStore.swift */; };
+		62371D3E1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */; };
+		62371D401B7C30B40066C2C9 /* TimelineDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */; };
+		62371D421B7C49970066C2C9 /* TimelineActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */; };
 		623AD4741A74D67900678EFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623AD4731A74D67900678EFF /* Images.xcassets */; };
 		623AD4831A74D67900678EFF /* TwitterLivestreamSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD4821A74D67900678EFF /* TwitterLivestreamSwiftTests.swift */; };
 		623AD5E71A75404B00678EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD46C1A74D67900678EFF /* AppDelegate.swift */; };
@@ -96,6 +100,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		62371D381B7C2DBC0066C2C9 /* TimelineStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStore.swift; sourceTree = "<group>"; };
+		62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStoreActionConstants.swift; sourceTree = "<group>"; };
+		62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineDispatcher.swift; sourceTree = "<group>"; };
+		62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineActionCreator.swift; sourceTree = "<group>"; };
 		623AD4671A74D67900678EFF /* TwitterLivestreamSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLivestreamSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623AD46B1A74D67900678EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623AD46C1A74D67900678EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -253,6 +261,10 @@
 			children = (
 				62D31B3B1B2171EA00B7BB32 /* TweetStore.swift */,
 				62D31B3D1B217AFC00B7BB32 /* MergeStrategies.swift */,
+				62371D381B7C2DBC0066C2C9 /* TimelineStore.swift */,
+				62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */,
+				62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */,
+				62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -402,11 +414,15 @@
 				623AD5E81A75404B00678EFF /* TimelineViewController.swift in Sources */,
 				6274B2A61A76A16B0010BC8A /* User.swift in Sources */,
 				62D31B3C1B2171EA00B7BB32 /* TweetStore.swift in Sources */,
+				62371D3E1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift in Sources */,
 				6274B2BC1A76CCF90010BC8A /* ImageDownload.swift in Sources */,
 				62D31B3E1B217AFC00B7BB32 /* MergeStrategies.swift in Sources */,
+				62371D401B7C30B40066C2C9 /* TimelineDispatcher.swift in Sources */,
+				62371D391B7C2DBC0066C2C9 /* TimelineStore.swift in Sources */,
 				6274B2A41A7542170010BC8A /* Tweet.swift in Sources */,
 				6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */,
 				6274B2A91A76A41B0010BC8A /* TweetTableViewCell.swift in Sources */,
+				62371D421B7C49970066C2C9 /* TimelineActionCreator.swift in Sources */,
 				62D438611B200A8500B29312 /* TwitterMetrics.swift in Sources */,
 				6274B2BE1A7701F30010BC8A /* TweetFilters.swift in Sources */,
 			);
