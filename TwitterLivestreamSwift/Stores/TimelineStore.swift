@@ -10,7 +10,7 @@ import Foundation
 
 struct TimelineStore {
     
-    static func handleAction(state: [Tweet] = [], action: Action) -> [Tweet] {
+    static func handleAction(state: [Tweet] = [], action: Action) -> TimelineState {
         switch action {
         case .FavoriteTweet(let tweet):
             return favoriteTweet(state, tweet: tweet)
@@ -19,11 +19,11 @@ struct TimelineStore {
         case .Mount:
             return state
         case .MergeServerState(let serverTweets):
-            return serverTweets
+          return mergeServerTweets(state, serverState: serverTweets)
         }
     }
     
-    static func favoriteTweet(var state: [Tweet], tweet: Tweet) -> [Tweet] {
+    static func favoriteTweet(var state: [Tweet], tweet: Tweet) -> TimelineState {
         let newTweet = Tweet(
             content: tweet.content,
             identifier: tweet.identifier,
@@ -32,13 +32,17 @@ struct TimelineStore {
             favoriteCount: tweet.favoriteCount,
             isFavorited: true
         )
-        
-        state.append(newTweet)
+      
+        let tweetIndex = find(state, tweet)
+      
+        if let tweetIndex = tweetIndex {
+          state[tweetIndex] = newTweet
+        }
         
         return state
     }
     
-    static func unfavoriteTweet(var state: [Tweet], tweet: Tweet) -> [Tweet] {
+    static func unfavoriteTweet(var state: [Tweet], tweet: Tweet) -> TimelineState {
         let newTweet = Tweet(
             content: tweet.content,
             identifier: tweet.identifier,
@@ -48,13 +52,17 @@ struct TimelineStore {
             isFavorited: false
         )
         
-        state.append(newTweet)
+        let tweetIndex = find(state, tweet)
         
+        if let tweetIndex = tweetIndex {
+          state[tweetIndex] = newTweet
+        }
+      
         return state
     }
   
-    static func mergeServerTweets(var state: TimelineState) -> TimelineState {
-        return state
+    static func mergeServerTweets(var state: TimelineState, serverState: TimelineState) -> TimelineState {
+        return mergeListIntoListLeftPriority(state, serverState)
     }
     
 }

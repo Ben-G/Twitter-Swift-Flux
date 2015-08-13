@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct Tweet : Equatable {
+struct Tweet : LastUpdateProcotol {
   let content: String
   let identifier: String
   let user: User
   let type: Tweet.TweetType
   let favoriteCount: Int
   let isFavorited: Bool
+  let lastUpdate = NSDate().timeIntervalSinceReferenceDate
   
   enum TweetType {
     case RegularTweet
@@ -24,4 +25,8 @@ struct Tweet : Equatable {
 
 func ==(lhs: Tweet, rhs: Tweet) -> Bool {
   return lhs.identifier == rhs.identifier
+}
+
+protocol LastUpdateProcotol: Equatable {
+  var lastUpdate: NSTimeInterval { get }
 }
