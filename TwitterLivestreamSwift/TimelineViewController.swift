@@ -15,6 +15,8 @@ class TimelineViewController: UIViewController {
   @IBOutlet weak var wordCountLabel: UILabel!
   var refreshControl: UIRefreshControl!
 
+  var timelineDispatcher = TimelineDispatcher()
+    
   var store: TweetStore = TweetStore()
   
   var filter:TweetFilter = TweetFilters.all {
@@ -39,19 +41,19 @@ class TimelineViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    timelineDispatcher.subscribe(self)
+    
     refreshControl = UIRefreshControl()
     tableView.insertSubview(refreshControl, atIndex:0)
     
     refreshControl.addTarget(self, action: "refresh", forControlEvents: .ValueChanged)
-    store.loadTweets().then { tweets in
-      self.tweets = tweets
-    }
+    
+    timelineDispatcher.dispatch { TimelineActionCreator.fetchServerTweets(50) }
   }
   
   func refresh() {
-    store.loadTweets().then { tweets in
-      self.tweets = tweets
-    }
+    timelineDispatcher.dispatch { TimelineActionCreator.fetchServerTweets(50) }
 
     let view = UIView()
     view.frame.size.height += 20
@@ -84,18 +86,23 @@ extension TimelineViewController : TweetTableViewCellFavoriteDelegateProtocol {
   func didFavorite(tweetTableViewCell:TweetTableViewCell) {
     let currentTweet = tweetTableViewCell.tweet!
     
-    let newTweet = Tweet(
-      content: currentTweet.content,
-      identifier: currentTweet.identifier,
-      user: currentTweet.user,
-      type: currentTweet.type,
-      favoriteCount: currentTweet.favoriteCount,
-      isFavorited: !currentTweet.isFavorited
-    )
+    timelineDispatcher.dispatch { TimelineActionCreator.favoriteTweet(currentTweet) }
     
-    store.addTweetChangeToLocalState(newTweet)
-    store.syncLocalState()
-    tweets = store.tweets
+    
+//    let currentTweet = tweetTableViewCell.tweet!
+//    
+//    let newTweet = Tweet(
+//      content: currentTweet.content,
+//      identifier: currentTweet.identifier,
+//      user: currentTweet.user,
+//      type: currentTweet.type,
+//      favoriteCount: currentTweet.favoriteCount,
+//      isFavorited: !currentTweet.isFavorited
+//    )
+//    
+//    store.addTweetChangeToLocalState(newTweet)
+//    store.syncLocalState()
+//    tweets = store.tweets
   }
 }
 
@@ -127,4 +134,11 @@ extension TimelineViewController {
   
 }
 
+extension TimelineViewController: TimelineSubscriber {
+  
+  func newState(state: TimelineState) {
+    tweets = state
+  }
+  
+}
 

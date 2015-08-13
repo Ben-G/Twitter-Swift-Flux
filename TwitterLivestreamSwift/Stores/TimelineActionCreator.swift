@@ -10,12 +10,33 @@ import Foundation
 
 struct TimelineActionCreator {
     
-    func favoriteTweet(tweet: Tweet) -> Action {
+    static func favoriteTweet(tweet: Tweet) -> ActionProvider {
+      return { _ in
         return .FavoriteTweet(tweet)
+      }
     }
     
-    func unfavoriteTweet(tweet: Tweet) -> Action {
+    static func unfavoriteTweet(tweet: Tweet) -> ActionProvider {
+      return { _ in
         return .UnfavoriteTweet(tweet)
+      }
     }
-    
+  
+  static func mergeServerState(state: [Tweet]) -> ActionProvider {
+      return { _ in
+        return .MergeServerState(state)
+      }
+  }
+  
+  static func fetchServerTweets(count: Int) -> ActionProvider {
+    return { state, dispatcher in
+      
+      fetchTweets(amount: count).then { serverTweets -> Void in
+        dispatcher.dispatch { TimelineActionCreator.mergeServerState(serverTweets) }
+      }
+      
+      return nil
+    }
+  }
+  
 }

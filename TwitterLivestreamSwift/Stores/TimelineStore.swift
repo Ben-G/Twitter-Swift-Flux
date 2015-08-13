@@ -18,6 +18,8 @@ struct TimelineStore {
             return unfavoriteTweet(state, tweet: tweet)
         case .Mount:
             return state
+        case .MergeServerState(let serverTweets):
+            return serverTweets
         }
     }
     
@@ -31,7 +33,7 @@ struct TimelineStore {
             isFavorited: true
         )
         
-        state.append(tweet)
+        state.append(newTweet)
         
         return state
     }
@@ -46,8 +48,12 @@ struct TimelineStore {
             isFavorited: false
         )
         
-        state.append(tweet)
+        state.append(newTweet)
         
+        return state
+    }
+  
+    static func mergeServerTweets(var state: TimelineState) -> TimelineState {
         return state
     }
     

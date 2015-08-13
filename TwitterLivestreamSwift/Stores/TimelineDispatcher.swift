@@ -30,6 +30,12 @@ class TimelineDispatcher {
             }
         }
     }
+  
+  func subscribe(subscriber: TimelineSubscriber) {
+    timelineSubscribers.append(subscriber)
+    subscriber.newState(timelineState)
+  }
+  
 }
 
 typealias ActionProviderProvider = () -> ActionProvider
