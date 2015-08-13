@@ -14,59 +14,6 @@ import UIKit
 
 var cachedSwifter: Swifter?
 
-
-struct TwitterClient : StoreSync {
-
-  static func syncLocalState(stateMerge: StateMerge<Tweet>) -> Promise<SyncResult<Tweet>> {
-    var originalList = stateMerge.originalList
-    var localState = stateMerge.localState
-    
-    return Promise { fullfil, reject in
-      var syncPromises = [Promise<(Tweet?, NSError?)>]()
-      
-      login().then {swifter -> () in
-        syncPromises = stateMerge.localState.map { tweet in
-          if (tweet.isFavorited) {
-            return syncCreateFavorite(tweet, swifter)
-          } else {
-            return syncDestroyFavorite(tweet, swifter)
-          }
-        }
-        
-        when(syncPromises).then { results -> () in
-          
-          for result in results {
-            
-            switch result {
-            case (let resultTweet, nil):
-              if let resultTweet = resultTweet {
-                let index = find(localState, resultTweet)
-                if let index = index {
-                  originalList = mergeListIntoListLeftPriority(localState, originalList)
-                  localState.removeAtIndex(index)
-                }
-              }
-            case (nil, let error):
-              println("One operation failed")
-            default:
-              println("Something unexpected happened")
-            }
-          }
-          
-          //TODO: update local and original state here
-          
-          fullfil(SyncResult.Success(StateMerge(originalList: originalList, localState: localState)))
-        }.catch {error in
-            reject(error)
-        }
-      }
-    }
-  }
-
-  
-}
-
-
 func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
   return  login().then { swifter in
             return loadTweets(swifter, amount)

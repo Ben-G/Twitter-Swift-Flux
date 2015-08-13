@@ -16,9 +16,7 @@ class TimelineViewController: UIViewController {
   var refreshControl: UIRefreshControl!
 
   var timelineDispatcher = TimelineDispatcher()
-    
-  var store: TweetStore = TweetStore()
-  
+      
   var filter:TweetFilter = TweetFilters.all {
     didSet {
       tableView?.reloadData()

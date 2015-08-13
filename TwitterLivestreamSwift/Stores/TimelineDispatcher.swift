@@ -12,6 +12,9 @@ import Foundation
 Maintains State
 */
 
+// TODO: make dispatcher thread safe using serial queue
+let storeQueue = dispatch_queue_create("de.benjamin-encz.twitterswift", nil)
+
 typealias TimelineState = (serverState: [Tweet], localState: [Tweet])
 typealias TimelineMergedState = (serverState: [Tweet], localState: [Tweet], mergedState: [Tweet])
 
