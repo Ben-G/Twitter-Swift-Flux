@@ -12,5 +12,6 @@ enum Action {
     case Mount
     case FavoriteTweet(Tweet)
     case UnfavoriteTweet(Tweet)
-    case MergeServerState([Tweet])
+    case SetServerState([Tweet])
+    case SetLocalState([Tweet])
 }

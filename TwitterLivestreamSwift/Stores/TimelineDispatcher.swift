@@ -12,7 +12,8 @@ import Foundation
 Maintains State
 */
 
-typealias TimelineState = [Tweet]
+typealias TimelineState = (serverState: [Tweet], localState: [Tweet])
+typealias TimelineMergedState = (serverState: [Tweet], localState: [Tweet], mergedState: [Tweet])
 
 class TimelineDispatcher {
     
@@ -26,15 +27,17 @@ class TimelineDispatcher {
             timelineState = TimelineStore.handleAction(state: timelineState, action: providedAction)
             // update subscribers with new state
             for subscriber in timelineSubscribers {
-                subscriber.newState(timelineState)
+                let mergedState = mergeListIntoListLeftPriority(timelineState.localState, timelineState.serverState)
+              subscriber.newState((serverState: timelineState.serverState, localState: timelineState.localState, mergedState: mergedState))
             }
         }
     }
   
-  func subscribe(subscriber: TimelineSubscriber) {
-    timelineSubscribers.append(subscriber)
-    subscriber.newState(timelineState)
-  }
+    func subscribe(subscriber: TimelineSubscriber) {
+      timelineSubscribers.append(subscriber)
+      let mergedState = mergeListIntoListLeftPriority(timelineState.localState, timelineState.serverState)
+      subscriber.newState((serverState: timelineState.serverState, localState: timelineState.localState, mergedState: mergedState))
+    }
   
 }
 
@@ -42,5 +45,5 @@ typealias ActionProviderProvider = () -> ActionProvider
 typealias ActionProvider = (state: TimelineState, dispatcher: TimelineDispatcher) -> Action?
 
 protocol TimelineSubscriber {
-    func newState(state: TimelineState)
+    func newState(state: TimelineMergedState)
 }

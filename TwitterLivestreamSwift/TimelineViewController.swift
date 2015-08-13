@@ -86,24 +86,15 @@ extension TimelineViewController : TweetTableViewCellFavoriteDelegateProtocol {
   func didFavorite(tweetTableViewCell:TweetTableViewCell) {
     let currentTweet = tweetTableViewCell.tweet!
     
-    timelineDispatcher.dispatch { TimelineActionCreator.favoriteTweet(currentTweet) }
+    if (currentTweet.isFavorited) {
+      timelineDispatcher.dispatch { TimelineActionCreator.unfavoriteTweet(currentTweet) }
+    } else {
+      timelineDispatcher.dispatch { TimelineActionCreator.favoriteTweet(currentTweet) }
+    }
     
-    
-//    let currentTweet = tweetTableViewCell.tweet!
-//    
-//    let newTweet = Tweet(
-//      content: currentTweet.content,
-//      identifier: currentTweet.identifier,
-//      user: currentTweet.user,
-//      type: currentTweet.type,
-//      favoriteCount: currentTweet.favoriteCount,
-//      isFavorited: !currentTweet.isFavorited
-//    )
-//    
-//    store.addTweetChangeToLocalState(newTweet)
-//    store.syncLocalState()
-//    tweets = store.tweets
+    timelineDispatcher.dispatch { TimelineActionCreator.syncFavorites() }
   }
+  
 }
 
 extension TimelineViewController {
@@ -136,8 +127,8 @@ extension TimelineViewController {
 
 extension TimelineViewController: TimelineSubscriber {
   
-  func newState(state: TimelineState) {
-    tweets = state
+  func newState(state: TimelineMergedState) {
+    tweets = state.mergedState
   }
   
 }

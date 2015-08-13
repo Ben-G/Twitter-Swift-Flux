@@ -10,7 +10,7 @@ import Foundation
 
 struct TimelineStore {
     
-    static func handleAction(state: [Tweet] = [], action: Action) -> TimelineState {
+    static func handleAction(state: TimelineState = ([],[]), action: Action) -> TimelineState {
         switch action {
         case .FavoriteTweet(let tweet):
             return favoriteTweet(state, tweet: tweet)
@@ -18,12 +18,14 @@ struct TimelineStore {
             return unfavoriteTweet(state, tweet: tweet)
         case .Mount:
             return state
-        case .MergeServerState(let serverTweets):
-          return mergeServerTweets(state, serverState: serverTweets)
+        case .SetServerState(let serverTweets):
+          return setServerState(state, serverState: serverTweets)
+        case .SetLocalState(let localState):
+          return setLocalState(state, localState: localState)
         }
     }
     
-    static func favoriteTweet(var state: [Tweet], tweet: Tweet) -> TimelineState {
+    static func favoriteTweet(var state: TimelineState, tweet: Tweet) -> TimelineState {
         let newTweet = Tweet(
             content: tweet.content,
             identifier: tweet.identifier,
@@ -33,16 +35,20 @@ struct TimelineStore {
             isFavorited: true
         )
       
-        let tweetIndex = find(state, tweet)
+        let tweetIndex = find(state.localState, tweet)
       
         if let tweetIndex = tweetIndex {
-          state[tweetIndex] = newTweet
+          // if we have stored local state for this tweet previously, override here
+          state.localState[tweetIndex] = newTweet
+        } else {
+          // else append new state
+          state.localState.append(newTweet)
         }
         
         return state
     }
     
-    static func unfavoriteTweet(var state: [Tweet], tweet: Tweet) -> TimelineState {
+    static func unfavoriteTweet(var state: TimelineState, tweet: Tweet) -> TimelineState {
         let newTweet = Tweet(
             content: tweet.content,
             identifier: tweet.identifier,
@@ -52,17 +58,28 @@ struct TimelineStore {
             isFavorited: false
         )
         
-        let tweetIndex = find(state, tweet)
+        let tweetIndex = find(state.localState, tweet)
         
         if let tweetIndex = tweetIndex {
-          state[tweetIndex] = newTweet
-        }
+          state.localState[tweetIndex] = newTweet
+        } else {
+          state.localState.append(newTweet)
+      }
       
         return state
     }
   
-    static func mergeServerTweets(var state: TimelineState, serverState: TimelineState) -> TimelineState {
-        return mergeListIntoListLeftPriority(state, serverState)
+    static func setServerState(state: TimelineState, serverState: [Tweet]) -> TimelineState {
+      var newState = state
+        newState.serverState = serverState
+      
+        return newState
     }
-    
+  
+    static func setLocalState(var state: TimelineState, localState: [Tweet]) -> TimelineState {
+      state.localState = localState
+      
+      return state
+    }
+  
 }

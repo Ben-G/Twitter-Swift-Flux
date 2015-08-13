@@ -79,7 +79,7 @@ func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
           }
 }
 
-private func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
+func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
   return Promise { fulfill, reject in
     let tweetId = tweet.identifier
     swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { status in
@@ -88,7 +88,7 @@ private func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?
   }
 }
 
-private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
+func syncDestroyFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
   return Promise { fulfill, reject in
     let tweetId = tweet.identifier
     swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { status in
@@ -99,7 +99,7 @@ private func syncDestroyFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet
   }
 }
 
-private func login() -> Promise<Swifter> {
+func login() -> Promise<Swifter> {
   let accountType = ACAccountStore().accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
   let accountStore = ACAccountStore()
   
