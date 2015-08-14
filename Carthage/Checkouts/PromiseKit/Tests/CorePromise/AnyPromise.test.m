@@ -1268,10 +1268,10 @@ __attribute__((objc_subclassing_restricted))
 - (AnyPromise *)bridge1;
 @end
 
-@interface TestPromiseBridge: XCTestCase
+@interface PMKTestPromiseBridge: XCTestCase
 @end
 
-@implementation TestPromiseBridge
+@implementation PMKTestPromiseBridge
 
 - (void)test1 {
     XCTestExpectation *ex = [self expectationWithDescription:@""];
@@ -1288,3 +1288,11 @@ __attribute__((objc_subclassing_restricted))
 }
 
 @end
+
+AnyPromise *PMKDummyAnyPromise_YES() {
+    return [AnyPromise promiseWithValue:@YES];
+}
+
+AnyPromise *PMKDummyAnyPromise_Manifold() {
+    return [AnyPromise promiseWithValue:PMKManifold(@YES, @NO, @NO)];
+}

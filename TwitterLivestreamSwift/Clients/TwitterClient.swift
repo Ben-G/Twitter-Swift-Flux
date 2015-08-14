@@ -11,6 +11,7 @@ import Foundation
 import Accounts
 import SwifteriOS
 import UIKit
+import SSKeychain
 
 var cachedSwifter: Swifter?
 
@@ -53,22 +54,37 @@ func login() -> Promise<Swifter> {
   return Promise { (fulfiller, _) in
     accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (t:Bool, e:NSError!) -> Void in
       
+      let twitterKeysDictionaryURL = NSBundle.mainBundle().URLForResource("TwitterKeys", withExtension: "plist")
+      
+      if twitterKeysDictionaryURL == nil {
+        println("You need to add a TwitterKey.plist with your consumer key and secret!")
+      }
+      
+      let keys = NSDictionary(contentsOfURL: twitterKeysDictionaryURL!)!
+      
+      let cachedKey = SSKeychain.passwordForService("twitterOAuthAccessTokenKey", account: "")
+      let cachedSecret = SSKeychain.passwordForService("twitterOAuthAccessTokenSecret", account: "")
+      
       if let cachedSwifter = cachedSwifter {
         fulfiller(cachedSwifter)
+      } else if let cachedKey = cachedKey, cachedSecret = cachedSecret {
+        let accessToken = SwifterCredential.OAuthAccessToken(key: cachedKey, secret: cachedSecret)
+        let credential = SwifterCredential(accessToken: accessToken)
+        
+        let swifter = Swifter(consumerKey: keys["consumer_key"] as! String, consumerSecret: keys["consumer_secret"] as! String, oauthToken: cachedKey, oauthTokenSecret: cachedSecret)
+        cachedSwifter = swifter
+        fulfiller(swifter)
       } else {
-        let twitterKeysDictionaryURL = NSBundle.mainBundle().URLForResource("TwitterKeys", withExtension: "plist")
-        
-        if twitterKeysDictionaryURL == nil {
-          println("You need to add a TwitterKey.plist with your consumer key and secret!")
-        }
-        
-        let keys = NSDictionary(contentsOfURL: twitterKeysDictionaryURL!)!
-        
         let swifter = Swifter(consumerKey: keys["consumer_key"] as! String, consumerSecret: keys["consumer_secret"] as! String)
         
         swifter.authorizeWithCallbackURL(NSURL(string: "swifter://success")!, success: { (accessToken, response) -> Void in
           // TODO: cache access token here
           cachedSwifter = swifter
+          
+          SSKeychain.setPassword(accessToken!.key, forService: "twitterOAuthAccessTokenKey", account: "")
+          SSKeychain.setPassword(accessToken!.secret, forService: "twitterOAuthAccessTokenSecret", account: "")
+
+          
           fulfiller(swifter)
           }, failure: { (error) -> Void in
             

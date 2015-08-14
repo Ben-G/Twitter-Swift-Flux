@@ -11,6 +11,8 @@
 		62371D3E1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */; };
 		62371D401B7C30B40066C2C9 /* TimelineDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */; };
 		62371D421B7C49970066C2C9 /* TimelineActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */; };
+		62371D5D1B7D66740066C2C9 /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62371D5B1B7D66580066C2C9 /* SSKeychain.framework */; };
+		62371D5E1B7D66740066C2C9 /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62371D5B1B7D66580066C2C9 /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		623AD4741A74D67900678EFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623AD4731A74D67900678EFF /* Images.xcassets */; };
 		623AD4831A74D67900678EFF /* TwitterLivestreamSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD4821A74D67900678EFF /* TwitterLivestreamSwiftTests.swift */; };
 		623AD5E71A75404B00678EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD46C1A74D67900678EFF /* AppDelegate.swift */; };
@@ -90,6 +92,7 @@
 			files = (
 				62A07D4E1B1EC4C1001F6916 /* Alamofire.framework in Embed Frameworks */,
 				62A07D4C1B1EC4B6001F6916 /* PromiseKit.framework in Embed Frameworks */,
+				62371D5E1B7D66740066C2C9 /* SSKeychain.framework in Embed Frameworks */,
 				62A07D501B1EC4DC001F6916 /* OMGHTTPURLRQ.framework in Embed Frameworks */,
 				6263CC961B77C5D0003BA0FF /* SwifteriOS.framework in Embed Frameworks */,
 			);
@@ -103,6 +106,7 @@
 		62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStoreActionConstants.swift; sourceTree = "<group>"; };
 		62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineDispatcher.swift; sourceTree = "<group>"; };
 		62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineActionCreator.swift; sourceTree = "<group>"; };
+		62371D5B1B7D66580066C2C9 /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = SOURCE_ROOT; };
 		623AD4671A74D67900678EFF /* TwitterLivestreamSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLivestreamSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623AD46B1A74D67900678EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623AD46C1A74D67900678EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 				62A07D491B1E9DC3001F6916 /* OMGHTTPURLRQ.framework in Frameworks */,
 				62A07D4B1B1EC4B6001F6916 /* PromiseKit.framework in Frameworks */,
 				62A07D4D1B1EC4C1001F6916 /* Alamofire.framework in Frameworks */,
+				62371D5D1B7D66740066C2C9 /* SSKeychain.framework in Frameworks */,
 				6263CC951B77C5D0003BA0FF /* SwifteriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +222,7 @@
 		623AD4A61A753B4200678EFF /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				62371D5B1B7D66580066C2C9 /* SSKeychain.framework */,
 				6263CC861B77C5BB003BA0FF /* Swifter.xcodeproj */,
 				62A07D451B1E9DC3001F6916 /* Alamofire.framework */,
 				62A07D461B1E9DC3001F6916 /* OMGHTTPURLRQ.framework */,

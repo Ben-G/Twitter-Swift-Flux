@@ -95,6 +95,7 @@
 		63196AC71AFD936300555BCD /* dispatch_promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63196AC41AFD936300555BCD /* dispatch_promise.swift */; };
 		63196AC81AFD936300555BCD /* dispatch_promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63196AC41AFD936300555BCD /* dispatch_promise.swift */; };
 		63196AC91AFD9F6E00555BCD /* after.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A60E1F1AFD795B00C4E692 /* after.m */; };
+		631A51BC1B29E7E90018606D /* bridging.test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631A51BB1B29E7E90018606D /* bridging.test.swift */; };
 		631FEA7F1AF28E4900ED9646 /* PMKPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 631FEA7E1AF28E4900ED9646 /* PMKPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		631FEA801AF28E4900ED9646 /* PMKPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 631FEA7E1AF28E4900ED9646 /* PMKPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63314ADA1AEDDC070071B6F5 /* hang.m in Sources */ = {isa = PBXBuildFile; fileRef = 63314AD71AEDDC070071B6F5 /* hang.m */; };
@@ -111,6 +112,7 @@
 		634E98B01AF917CF00094594 /* Stubbilino.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 634E98AC1AF916BD00094594 /* Stubbilino.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		635121511B0A585B008ED696 /* when.test.m in Sources */ = {isa = PBXBuildFile; fileRef = 635121501B0A585B008ED696 /* when.test.m */; };
 		63533B391AE57A9300C10972 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F803CC1AB89A0F00E4DEE1 /* PromiseKit.framework */; };
+		635421E01B38C53E00401F9B /* KIF.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635421DF1B38C53E00401F9B /* KIF.framework */; };
 		635D0D731ADD7CE700CC0406 /* PMKPromise.test.m in Sources */ = {isa = PBXBuildFile; fileRef = 635D0D711ADD7CAE00CC0406 /* PMKPromise.test.m */; };
 		635D0D761ADDA2EA00CC0406 /* AnyPromise.test.m in Sources */ = {isa = PBXBuildFile; fileRef = 635D0D741ADDA2C100CC0406 /* AnyPromise.test.m */; };
 		635D0D7B1ADDB11400CC0406 /* ErrorUnhandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D0D7A1ADDB11400CC0406 /* ErrorUnhandler.swift */; };
@@ -127,8 +129,6 @@
 		638CDF331AEE76060023A543 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 638CDF301AEE76060023A543 /* Default-568h@2x.png */; };
 		638CDF351AEE76060023A543 /* PMKTestHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638CDF321AEE76060023A543 /* PMKTestHost.swift */; };
 		638D02781AEC06430038201C /* after.test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D02771AEC06430038201C /* after.test.swift */; };
-		638DFF561AFABA0100465598 /* KIFFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638DFF551AFABA0100465598 /* KIFFramework.framework */; };
-		638DFF581AFABA8000465598 /* KIFFramework.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 638DFF551AFABA0100465598 /* KIFFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		638DFF5B1AFACC9400465598 /* TestUIActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DFF591AFACC9400465598 /* TestUIActionSheet.swift */; };
 		638DFF5C1AFACC9400465598 /* TestUIAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DFF5A1AFACC9400465598 /* TestUIAlertView.swift */; };
 		638DFF601AFAEB4700465598 /* TestNSNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DFF5D1AFAEB4700465598 /* TestNSNotificationCenter.swift */; };
@@ -167,6 +167,7 @@
 		63A157731ABB59D00002A421 /* AnyPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A157711ABB59D00002A421 /* AnyPromise.m */; };
 		63A157741ABB59D80002A421 /* PromiseKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A157701ABB59490002A421 /* PromiseKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63A157751ABB59DC0002A421 /* PromiseKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A157701ABB59490002A421 /* PromiseKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		63A5389A1B741F0A002BB8E6 /* AnyPromise.test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A538991B741F0A002BB8E6 /* AnyPromise.test.swift */; };
 		63A60E201AFD795B00C4E692 /* after.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A60E1F1AFD795B00C4E692 /* after.m */; };
 		63B6FE491ABB613500E1F4C2 /* Sealant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B6FE481ABB613500E1F4C2 /* Sealant.swift */; };
 		63B6FE4A1ABB613500E1F4C2 /* Sealant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B6FE481ABB613500E1F4C2 /* Sealant.swift */; };
@@ -187,6 +188,8 @@
 		63CA14871AEA930C00223904 /* 2.3.3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BCB8C51AD3279C000AF3D0 /* 2.3.3.swift */; };
 		63CA14881AEA930C00223904 /* 2.3.4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BCB8C61AD3279C000AF3D0 /* 2.3.4.swift */; };
 		63CA14991AEA9CBF00223904 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F803A31AB87A8200E4DEE1 /* PromiseKit.framework */; };
+		63CF406A1B29FD1400F0F5FC /* afterlife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D73BE11B20B48F00843146 /* afterlife.swift */; };
+		63D73BE21B20B48F00843146 /* afterlife.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D73BE11B20B48F00843146 /* afterlife.swift */; };
 		63D88E691AEB09CE00615362 /* TestSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637BF6121AEAC62400997C8B /* TestSocial.swift */; };
 		63D953C91AEDA3B1004981FF /* AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D953C71AEDA3B1004981FF /* AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63D953CA1AEDA4D0004981FF /* AnyPromise.h in Headers */ = {isa = PBXBuildFile; fileRef = 63D953C71AEDA3B1004981FF /* AnyPromise.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -263,7 +266,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				638DFF581AFABA8000465598 /* KIFFramework.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +369,7 @@
 		63196ABE1AFD8B7100555BCD /* Promise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Promise.h; path = Sources/Promise.h; sourceTree = "<group>"; };
 		63196AC31AFD936300555BCD /* dispatch_promise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dispatch_promise.m; path = Sources/dispatch_promise.m; sourceTree = "<group>"; };
 		63196AC41AFD936300555BCD /* dispatch_promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dispatch_promise.swift; path = Sources/dispatch_promise.swift; sourceTree = "<group>"; };
+		631A51BB1B29E7E90018606D /* bridging.test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bridging.test.swift; sourceTree = "<group>"; };
 		631FEA7E1AF28E4900ED9646 /* PMKPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMKPromise.h; path = Sources/PMKPromise.h; sourceTree = "<group>"; };
 		63314AD71AEDDC070071B6F5 /* hang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = hang.m; path = Sources/hang.m; sourceTree = "<group>"; };
 		63314AD81AEDDC070071B6F5 /* join.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = join.m; path = Sources/join.m; sourceTree = "<group>"; };
@@ -377,6 +380,7 @@
 		634E98AC1AF916BD00094594 /* Stubbilino.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stubbilino.framework; path = Carthage/Build/Mac/Stubbilino.framework; sourceTree = "<group>"; };
 		635121501B0A585B008ED696 /* when.test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = when.test.m; sourceTree = "<group>"; };
 		63533B331AE57A9300C10972 /* PMKAPlusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMKAPlusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		635421DF1B38C53E00401F9B /* KIF.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KIF.framework; path = Carthage/Build/iOS/KIF.framework; sourceTree = "<group>"; };
 		635D0D711ADD7CAE00CC0406 /* PMKPromise.test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMKPromise.test.m; path = Tests/CorePromise/PMKPromise.test.m; sourceTree = SOURCE_ROOT; };
 		635D0D741ADDA2C100CC0406 /* AnyPromise.test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnyPromise.test.m; path = Tests/CorePromise/AnyPromise.test.m; sourceTree = SOURCE_ROOT; };
 		635D0D7A1ADDB11400CC0406 /* ErrorUnhandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorUnhandler.swift; path = Sources/ErrorUnhandler.swift; sourceTree = "<group>"; };
@@ -394,7 +398,6 @@
 		638CDF311AEE76060023A543 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tests/HostingApp/Info.plist; sourceTree = SOURCE_ROOT; };
 		638CDF321AEE76060023A543 /* PMKTestHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PMKTestHost.swift; path = Tests/HostingApp/PMKTestHost.swift; sourceTree = SOURCE_ROOT; };
 		638D02771AEC06430038201C /* after.test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = after.test.swift; path = CorePromise/after.test.swift; sourceTree = "<group>"; };
-		638DFF551AFABA0100465598 /* KIFFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KIFFramework.framework; path = Carthage/Build/iOS/KIFFramework.framework; sourceTree = "<group>"; };
 		638DFF591AFACC9400465598 /* TestUIActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestUIActionSheet.swift; path = Categories/TestUIActionSheet.swift; sourceTree = "<group>"; };
 		638DFF5A1AFACC9400465598 /* TestUIAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestUIAlertView.swift; path = Categories/TestUIAlertView.swift; sourceTree = "<group>"; };
 		638DFF5D1AFAEB4700465598 /* TestNSNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestNSNotificationCenter.swift; path = Categories/TestNSNotificationCenter.swift; sourceTree = "<group>"; };
@@ -407,6 +410,7 @@
 		63A157701ABB59490002A421 /* PromiseKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PromiseKit.h; path = Sources/PromiseKit.h; sourceTree = SOURCE_ROOT; };
 		63A157711ABB59D00002A421 /* AnyPromise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnyPromise.m; path = Sources/AnyPromise.m; sourceTree = "<group>"; };
 		63A157771ABB5C3B0002A421 /* PMKCallVariadicBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PMKCallVariadicBlock.m; path = Sources/PMKCallVariadicBlock.m; sourceTree = "<group>"; };
+		63A538991B741F0A002BB8E6 /* AnyPromise.test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyPromise.test.swift; sourceTree = "<group>"; };
 		63A60E1F1AFD795B00C4E692 /* after.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = after.m; path = Sources/after.m; sourceTree = "<group>"; };
 		63B4F8AF1AD19EDB0036A41A /* NSJSONFromData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NSJSONFromData.swift; path = Sources/NSJSONFromData.swift; sourceTree = SOURCE_ROOT; };
 		63B6FE461ABB5EC700E1F4C2 /* NSMethodSignatureForBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSMethodSignatureForBlock.m; path = Sources/NSMethodSignatureForBlock.m; sourceTree = "<group>"; };
@@ -421,10 +425,12 @@
 		63BCB8C51AD3279C000AF3D0 /* 2.3.3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2.3.3.swift; sourceTree = "<group>"; };
 		63BCB8C61AD3279C000AF3D0 /* 2.3.4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 2.3.4.swift; sourceTree = "<group>"; };
 		63BF9DCF1AB9E4850049EA39 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = State.swift; path = Sources/State.swift; sourceTree = "<group>"; };
+		63C845191B4B072500623517 /* bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = CorePromise/bridge.h; sourceTree = "<group>"; };
 		63CA14571AE9FBD000223904 /* PMKOSXCategoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMKOSXCategoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CA14931AEA9CBE00223904 /* PMKiOSCategoryHostedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PMKiOSCategoryHostedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CA14C61AEA9E7400223904 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		63CA14C71AEA9E7400223904 /* OMGHTTPURLRQ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OMGHTTPURLRQ.framework; path = Carthage/Build/iOS/OMGHTTPURLRQ.framework; sourceTree = "<group>"; };
+		63D73BE11B20B48F00843146 /* afterlife.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = afterlife.swift; sourceTree = "<group>"; };
 		63D953C71AEDA3B1004981FF /* AnyPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyPromise.h; path = Sources/AnyPromise.h; sourceTree = "<group>"; };
 		63DF16F41AEAC46E00BE97DD /* TestAccounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestAccounts.m; path = Categories/TestAccounts.m; sourceTree = "<group>"; };
 		63DF16F51AEAC46E00BE97DD /* TestAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestAccounts.swift; path = Categories/TestAccounts.swift; sourceTree = "<group>"; };
@@ -501,8 +507,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				638DFF561AFABA0100465598 /* KIFFramework.framework in Frameworks */,
 				63CA14991AEA9CBF00223904 /* PromiseKit.framework in Frameworks */,
+				635421E01B38C53E00401F9B /* KIF.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +580,7 @@
 		6302ACA71AEF42F2001F0069 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				63D73BE11B20B48F00843146 /* afterlife.swift */,
 				6302ACA81AEF42F2001F0069 /* NSFileManager+Promise.swift */,
 				6302ACA91AEF42F2001F0069 /* NSNotificationCenter+AnyPromise.h */,
 				6302ACAA1AEF42F2001F0069 /* NSNotificationCenter+AnyPromise.m */,
@@ -699,6 +706,7 @@
 			children = (
 				638D02771AEC06430038201C /* after.test.swift */,
 				635D0D741ADDA2C100CC0406 /* AnyPromise.test.m */,
+				63A538991B741F0A002BB8E6 /* AnyPromise.test.swift */,
 				63772C9B1AF09B8A00ED2F59 /* ErrorUnhandler.test.swift */,
 				635D0D711ADD7CAE00CC0406 /* PMKPromise.test.m */,
 				6302AD3F1AEF55A4001F0069 /* Promise.test.swift */,
@@ -706,6 +714,8 @@
 				6388E1AE1AD316690074D85B /* when.test.swift */,
 				635121501B0A585B008ED696 /* when.test.m */,
 				6388E1B11AD316CB0074D85B /* zalgo.test.swift */,
+				631A51BB1B29E7E90018606D /* bridging.test.swift */,
+				63C845191B4B072500623517 /* bridge.h */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -824,14 +834,14 @@
 		63CA14C51AEA9E1500223904 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				63F803A31AB87A8200E4DEE1 /* PromiseKit.framework */,
-				634E98A91AF916AA00094594 /* Stubbilino.framework */,
-				63CA14C61AEA9E7400223904 /* OHHTTPStubs.framework */,
-				63CA14C71AEA9E7400223904 /* OMGHTTPURLRQ.framework */,
-				638DFF551AFABA0100465598 /* KIFFramework.framework */,
+				635421DF1B38C53E00401F9B /* KIF.framework */,
 				638E0ED51AEF16530052E28F /* PMKiOSCategoryTests.xctest */,
 				63CA14931AEA9CBE00223904 /* PMKiOSCategoryHostedTests.xctest */,
 				638CDF031AEE734B0023A543 /* PMKTestHost.app */,
+				63F803A31AB87A8200E4DEE1 /* PromiseKit.framework */,
+				63CA14C61AEA9E7400223904 /* OHHTTPStubs.framework */,
+				63CA14C71AEA9E7400223904 /* OMGHTTPURLRQ.framework */,
+				634E98A91AF916AA00094594 /* Stubbilino.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -1091,7 +1101,7 @@
 		63F8039A1AB87A8200E4DEE1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Max Howell";
 				TargetAttributes = {
 					63533B321AE57A9300C10972 = {
@@ -1214,11 +1224,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631A51BC1B29E7E90018606D /* bridging.test.swift in Sources */,
 				635D0D731ADD7CE700CC0406 /* PMKPromise.test.m in Sources */,
 				635121511B0A585B008ED696 /* when.test.m in Sources */,
 				638D02781AEC06430038201C /* after.test.swift in Sources */,
 				635D0D761ADDA2EA00CC0406 /* AnyPromise.test.m in Sources */,
 				6302AD401AEF55A4001F0069 /* Promise.test.swift in Sources */,
+				63A5389A1B741F0A002BB8E6 /* AnyPromise.test.swift in Sources */,
 				6388E1B21AD316CB0074D85B /* race.test.swift in Sources */,
 				63772C9C1AF09B8A00ED2F59 /* ErrorUnhandler.test.swift in Sources */,
 				6388E1AF1AD316690074D85B /* when.test.swift in Sources */,
@@ -1291,6 +1303,7 @@
 				638E0F211AEF171E0052E28F /* TestStoreKit.swift in Sources */,
 				6302ACE41AEF42F2001F0069 /* AVAudioSession+Promise.swift in Sources */,
 				6302ACF81AEF42F2001F0069 /* NSNotificationCenter+AnyPromise.m in Sources */,
+				63CF406A1B29FD1400F0F5FC /* afterlife.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,6 +1343,7 @@
 				63DF17051AEAC46E00BE97DD /* TestAccounts.m in Sources */,
 				6302ACF91AEF42F2001F0069 /* NSNotificationCenter+AnyPromise.m in Sources */,
 				6302AD131AEF42F2001F0069 /* CALayer+AnyPromise.m in Sources */,
+				63D73BE21B20B48F00843146 /* afterlife.swift in Sources */,
 				63DF170D1AEAC46E00BE97DD /* TestCloudKit.m in Sources */,
 				6302ACF31AEF42F2001F0069 /* CLLocationManager+AnyPromise.m in Sources */,
 				6302ACED1AEF42F2001F0069 /* CKDatabase+Promise.swift in Sources */,
@@ -1519,6 +1533,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = Tests/CorePromise/bridge.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1540,6 +1555,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = Tests/CorePromise/bridge.h;
 			};
 			name = Release;
 		};
@@ -1682,7 +1698,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos8.3;
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PMKTestHost.app/PMKTestHost";
 			};
 			name = Debug;
@@ -1701,7 +1717,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos8.3;
+				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PMKTestHost.app/PMKTestHost";
 			};
 			name = Release;
@@ -1724,7 +1740,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.0.2;
+				CURRENT_PROJECT_VERSION = 2.2.2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1774,7 +1790,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.0.2;
+				CURRENT_PROJECT_VERSION = 2.2.2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				ENABLE_NS_ASSERTIONS = NO;
