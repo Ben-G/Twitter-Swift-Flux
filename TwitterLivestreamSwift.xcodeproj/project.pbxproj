@@ -13,6 +13,7 @@
 		62371D421B7C49970066C2C9 /* TimelineActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */; };
 		62371D5D1B7D66740066C2C9 /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62371D5B1B7D66580066C2C9 /* SSKeychain.framework */; };
 		62371D5E1B7D66740066C2C9 /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62371D5B1B7D66580066C2C9 /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		62371D601B7D6AA60066C2C9 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D5F1B7D6AA60066C2C9 /* Authentication.swift */; };
 		623AD4741A74D67900678EFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 623AD4731A74D67900678EFF /* Images.xcassets */; };
 		623AD4831A74D67900678EFF /* TwitterLivestreamSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD4821A74D67900678EFF /* TwitterLivestreamSwiftTests.swift */; };
 		623AD5E71A75404B00678EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD46C1A74D67900678EFF /* AppDelegate.swift */; };
@@ -107,6 +108,7 @@
 		62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineDispatcher.swift; sourceTree = "<group>"; };
 		62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineActionCreator.swift; sourceTree = "<group>"; };
 		62371D5B1B7D66580066C2C9 /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = SOURCE_ROOT; };
+		62371D5F1B7D6AA60066C2C9 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		623AD4671A74D67900678EFF /* TwitterLivestreamSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterLivestreamSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		623AD46B1A74D67900678EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623AD46C1A74D67900678EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				6274B2B91A76CCEC0010BC8A /* TwitterClient.swift */,
 				6274B2BB1A76CCF90010BC8A /* ImageDownload.swift */,
 				62D438601B200A8500B29312 /* TwitterMetrics.swift */,
+				62371D5F1B7D6AA60066C2C9 /* Authentication.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				62D31B3E1B217AFC00B7BB32 /* MergeStrategies.swift in Sources */,
 				62371D401B7C30B40066C2C9 /* TimelineDispatcher.swift in Sources */,
 				62371D391B7C2DBC0066C2C9 /* TimelineStore.swift in Sources */,
+				62371D601B7D6AA60066C2C9 /* Authentication.swift in Sources */,
 				6274B2A41A7542170010BC8A /* Tweet.swift in Sources */,
 				6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */,
 				6274B2A91A76A41B0010BC8A /* TweetTableViewCell.swift in Sources */,

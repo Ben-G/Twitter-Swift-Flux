@@ -53,10 +53,6 @@ class TimelineViewController: UIViewController {
   func refresh() {
     timelineDispatcher.dispatch { TimelineActionCreator.fetchServerTweets(50) }
     
-    let view = UIView()
-    view.frame.size.height += 20
-    println(view.frame)
-    
     refreshControl.endRefreshing()
   }
 }
