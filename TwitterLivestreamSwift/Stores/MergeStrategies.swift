@@ -23,3 +23,17 @@ func mergeListIntoListLeftPriority <T : Equatable> (leftList:[T], rightList:[T])
   
   return mergedList
 }
+
+func mergeSynchronizedTweet(tweet: Tweet, var state: TimelineState) -> TimelineState {
+  let index = find(state.localState, tweet)
+  
+  if let index = index {
+    state.localState.removeAtIndex(index)
+    let index = find(state.serverState, tweet)
+    if let index = index {
+      state.serverState[index] = tweet
+    }
+  }
+  
+  return state
+}

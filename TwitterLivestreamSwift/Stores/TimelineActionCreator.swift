@@ -38,7 +38,7 @@ struct TimelineActionCreator {
   static func fetchServerTweets(count: Int) -> ActionProvider {
     return { state, dispatcher in
       
-      fetchTweets(amount: count).then { serverTweets -> Void in
+      TwitterClient.fetchTweets(amount: count).then { serverTweets -> Void in
         dispatcher.dispatch { TimelineActionCreator.setServerState(serverTweets) }
       }
       
@@ -53,12 +53,12 @@ struct TimelineActionCreator {
       var mergedList: [Tweet] = []
       
       
-      login().then {swifter -> () in
+      TwitterClient.login().then {swifter -> () in
         syncPromises = state.localState.map { tweet in
           if (tweet.isFavorited) {
-            return syncCreateFavorite(tweet, swifter)
+            return TwitterClient.syncCreateFavorite(tweet, swifter: swifter)
           } else {
-            return syncDestroyFavorite(tweet, swifter)
+            return TwitterClient.syncDestroyFavorite(tweet, swifter: swifter)
           }
         }
         
@@ -69,14 +69,7 @@ struct TimelineActionCreator {
             switch result {
             case (let resultTweet, nil):
               if let resultTweet = resultTweet {
-                let index = find(state.localState, resultTweet)
-                if let index = index {
-                  state.localState.removeAtIndex(index)
-                  let index = find(state.serverState, resultTweet)
-                  if let index = index {
-                    state.serverState[index] = resultTweet
-                  }
-                }
+                state = mergeSynchronizedTweet(resultTweet, state)
               }
             case (nil, let error):
               println("One operation failed")
