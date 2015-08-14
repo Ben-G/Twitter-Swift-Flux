@@ -10,13 +10,13 @@ import UIKit
 import SwifteriOS
 
 class TimelineViewController: UIViewController {
-
+  
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var wordCountLabel: UILabel!
   var refreshControl: UIRefreshControl!
-
+  
   var timelineDispatcher = TimelineDispatcher()
-      
+  
   var filter:TweetFilter = TweetFilters.all {
     didSet {
       tableView?.reloadData()
@@ -52,7 +52,7 @@ class TimelineViewController: UIViewController {
   
   func refresh() {
     timelineDispatcher.dispatch { TimelineActionCreator.fetchServerTweets(50) }
-
+    
     let view = UIView()
     view.frame.size.height += 20
     println(view.frame)

@@ -17,14 +17,14 @@ var cachedSwifter: Swifter?
 
 func fetchTweets(amount:Int = 50) -> Promise<[Tweet]> {
   return  login().then { swifter in
-            return loadTweets(swifter, amount)
-          }.then { statuses -> [Tweet] in
-            if let statuses = statuses {
-              return parseTweets(statuses)
-            } else {
-              return [Tweet]()
-            }
-          }
+    return loadTweets(swifter, amount)
+    }.then { statuses -> [Tweet] in
+      if let statuses = statuses {
+        return parseTweets(statuses)
+      } else {
+        return [Tweet]()
+      }
+  }
 }
 
 func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSError?)> {
@@ -32,7 +32,7 @@ func syncCreateFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSErro
     let tweetId = tweet.identifier
     swifter.postCreateFavoriteWithID(tweetId, includeEntities: false, success: { status in
       fulfill(tweet, nil)
-    }, failure: { error in reject(error) })
+      }, failure: { error in reject(error) })
   }
 }
 
@@ -41,8 +41,8 @@ func syncDestroyFavorite(tweet:Tweet, swifter:Swifter) -> Promise<(Tweet?, NSErr
     let tweetId = tweet.identifier
     swifter.postDestroyFavoriteWithID(tweetId, includeEntities: false, success: { status in
       fulfill(tweet, nil)
-    }, failure: { error in
-      fulfill(nil,error)
+      }, failure: { error in
+        fulfill(nil,error)
     })
   }
 }
@@ -83,7 +83,7 @@ func login() -> Promise<Swifter> {
           
           SSKeychain.setPassword(accessToken!.key, forService: "twitterOAuthAccessTokenKey", account: "")
           SSKeychain.setPassword(accessToken!.secret, forService: "twitterOAuthAccessTokenSecret", account: "")
-
+          
           
           fulfiller(swifter)
           }, failure: { (error) -> Void in
@@ -96,9 +96,9 @@ func login() -> Promise<Swifter> {
 
 private func loadTweets(swifter:Swifter, amount:Int) -> Promise<[JSONValue]?> {
   return Promise { (fulfiller, reject) in
-
+    
     swifter.getStatusesHomeTimelineWithCount(amount, sinceID: nil, maxID: nil, trimUser: nil, contributorDetails: nil, includeEntities: nil, success: { (statuses) -> Void in
-        fulfiller(statuses)
+      fulfiller(statuses)
       }, failure: { error in reject(error) }
     )
   }
@@ -137,14 +137,14 @@ private func parseTweets(tweets: [JSONValue]) -> [Tweet] {
 
 
 private func profilePictureURLForCurrentDeviceType(tweet: JSONValue) -> String {
-    var regularPictureURL = tweet["user"]["profile_image_url_https"].string!
+  var regularPictureURL = tweet["user"]["profile_image_url_https"].string!
+  
+  if (UIScreen.mainScreen().scale >= 2.0) {
+    var largePictureURL = (regularPictureURL as NSString).mutableCopy() as! NSMutableString
+    largePictureURL.replaceOccurrencesOfString("_normal.png", withString: "_bigger.png", options: NSStringCompareOptions.BackwardsSearch, range: NSRange(location: 0, length: largePictureURL.length))
     
-    if (UIScreen.mainScreen().scale >= 2.0) {
-        var largePictureURL = (regularPictureURL as NSString).mutableCopy() as! NSMutableString
-        largePictureURL.replaceOccurrencesOfString("_normal.png", withString: "_bigger.png", options: NSStringCompareOptions.BackwardsSearch, range: NSRange(location: 0, length: largePictureURL.length))
-
-        return largePictureURL as String
-    } else {
-        return regularPictureURL
-    }
+    return largePictureURL as String
+  } else {
+    return regularPictureURL
+  }
 }

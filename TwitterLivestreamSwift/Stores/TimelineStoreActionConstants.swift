@@ -9,9 +9,9 @@
 import Foundation
 
 enum Action {
-    case Mount
-    case FavoriteTweet(Tweet)
-    case UnfavoriteTweet(Tweet)
-    case SetServerState([Tweet])
-    case SetLocalState([Tweet])
+  case Mount
+  case FavoriteTweet(Tweet)
+  case UnfavoriteTweet(Tweet)
+  case SetServerState([Tweet])
+  case SetLocalState([Tweet])
 }

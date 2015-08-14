@@ -10,29 +10,29 @@ import Foundation
 import PromiseKit
 
 struct TimelineActionCreator {
-    
-    static func favoriteTweet(tweet: Tweet) -> ActionProvider {
-      return { _ in
-        return .FavoriteTweet(tweet)
-      }
+  
+  static func favoriteTweet(tweet: Tweet) -> ActionProvider {
+    return { _ in
+      return .FavoriteTweet(tweet)
     }
-    
-    static func unfavoriteTweet(tweet: Tweet) -> ActionProvider {
-      return { _ in
-        return .UnfavoriteTweet(tweet)
-      }
+  }
+  
+  static func unfavoriteTweet(tweet: Tweet) -> ActionProvider {
+    return { _ in
+      return .UnfavoriteTweet(tweet)
     }
+  }
   
   static func setServerState(state: [Tweet]) -> ActionProvider {
-      return { _ in
-        return .SetServerState(state)
-      }
+    return { _ in
+      return .SetServerState(state)
+    }
   }
   
   static func setLocalState(state: [Tweet]) -> ActionProvider {
-      return { _ in
-        return .SetLocalState(state)
-      }
+    return { _ in
+      return .SetLocalState(state)
+    }
   }
   
   static func fetchServerTweets(count: Int) -> ActionProvider {
@@ -51,7 +51,7 @@ struct TimelineActionCreator {
       
       var syncPromises = [Promise<(Tweet?, NSError?)>]()
       var mergedList: [Tweet] = []
-
+      
       
       login().then {swifter -> () in
         syncPromises = state.localState.map { tweet in
@@ -87,7 +87,7 @@ struct TimelineActionCreator {
           
           dispatcher.dispatch { TimelineActionCreator.setLocalState(state.localState) }
           dispatcher.dispatch { TimelineActionCreator.setServerState(state.serverState) }
-      
+          
           }.catch {error in
             // error handling
         }
