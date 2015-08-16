@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62371D391B7C2DBC0066C2C9 /* TimelineStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D381B7C2DBC0066C2C9 /* TimelineStore.swift */; };
-		62371D3E1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */; };
+		62371D391B7C2DBC0066C2C9 /* TimelineReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D381B7C2DBC0066C2C9 /* TimelineReducers.swift */; };
+		62371D3E1B7C2E800066C2C9 /* TimelineActionConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3D1B7C2E800066C2C9 /* TimelineActionConstants.swift */; };
 		62371D401B7C30B40066C2C9 /* TimelineDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */; };
 		62371D421B7C49970066C2C9 /* TimelineActionCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */; };
 		62371D5D1B7D66740066C2C9 /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62371D5B1B7D66580066C2C9 /* SSKeychain.framework */; };
@@ -103,8 +103,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		62371D381B7C2DBC0066C2C9 /* TimelineStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStore.swift; sourceTree = "<group>"; };
-		62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineStoreActionConstants.swift; sourceTree = "<group>"; };
+		62371D381B7C2DBC0066C2C9 /* TimelineReducers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineReducers.swift; sourceTree = "<group>"; };
+		62371D3D1B7C2E800066C2C9 /* TimelineActionConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineActionConstants.swift; sourceTree = "<group>"; };
 		62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineDispatcher.swift; sourceTree = "<group>"; };
 		62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineActionCreator.swift; sourceTree = "<group>"; };
 		62371D5B1B7D66580066C2C9 /* SSKeychain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SSKeychain.framework; path = Carthage/Build/iOS/SSKeychain.framework; sourceTree = SOURCE_ROOT; };
@@ -267,8 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				62D31B3D1B217AFC00B7BB32 /* MergeStrategies.swift */,
-				62371D381B7C2DBC0066C2C9 /* TimelineStore.swift */,
-				62371D3D1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift */,
+				62371D381B7C2DBC0066C2C9 /* TimelineReducers.swift */,
+				62371D3D1B7C2E800066C2C9 /* TimelineActionConstants.swift */,
 				62371D3F1B7C30B40066C2C9 /* TimelineDispatcher.swift */,
 				62371D411B7C49970066C2C9 /* TimelineActionCreator.swift */,
 			);
@@ -419,11 +419,11 @@
 				623AD5E71A75404B00678EFF /* AppDelegate.swift in Sources */,
 				623AD5E81A75404B00678EFF /* TimelineViewController.swift in Sources */,
 				6274B2A61A76A16B0010BC8A /* User.swift in Sources */,
-				62371D3E1B7C2E800066C2C9 /* TimelineStoreActionConstants.swift in Sources */,
+				62371D3E1B7C2E800066C2C9 /* TimelineActionConstants.swift in Sources */,
 				6274B2BC1A76CCF90010BC8A /* ImageDownload.swift in Sources */,
 				62D31B3E1B217AFC00B7BB32 /* MergeStrategies.swift in Sources */,
 				62371D401B7C30B40066C2C9 /* TimelineDispatcher.swift in Sources */,
-				62371D391B7C2DBC0066C2C9 /* TimelineStore.swift in Sources */,
+				62371D391B7C2DBC0066C2C9 /* TimelineReducers.swift in Sources */,
 				62371D601B7D6AA60066C2C9 /* Authentication.swift in Sources */,
 				6274B2A41A7542170010BC8A /* Tweet.swift in Sources */,
 				6274B2BA1A76CCEC0010BC8A /* TwitterClient.swift in Sources */,

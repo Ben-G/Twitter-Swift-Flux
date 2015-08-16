@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TimelineStore {
+struct TimelineReducers {
   
   static func handleAction(state: TimelineState = ([],[]), action: Action) -> TimelineState {
     switch action {

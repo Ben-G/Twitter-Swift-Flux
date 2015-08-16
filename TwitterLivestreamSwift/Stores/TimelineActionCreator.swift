@@ -11,31 +11,31 @@ import PromiseKit
 
 struct TimelineActionCreator {
   
-  static func favoriteTweet(tweet: Tweet) -> ActionProvider {
+  static func favoriteTweet(tweet: Tweet) -> ActionCreator {
     return { _ in
       return .FavoriteTweet(tweet)
     }
   }
   
-  static func unfavoriteTweet(tweet: Tweet) -> ActionProvider {
+  static func unfavoriteTweet(tweet: Tweet) -> ActionCreator {
     return { _ in
       return .UnfavoriteTweet(tweet)
     }
   }
   
-  static func setServerState(state: [Tweet]) -> ActionProvider {
+  static func setServerState(state: [Tweet]) -> ActionCreator {
     return { _ in
       return .SetServerState(state)
     }
   }
   
-  static func setLocalState(state: [Tweet]) -> ActionProvider {
+  static func setLocalState(state: [Tweet]) -> ActionCreator {
     return { _ in
       return .SetLocalState(state)
     }
   }
   
-  static func fetchServerTweets(count: Int) -> ActionProvider {
+  static func fetchServerTweets(count: Int) -> ActionCreator {
     return { state, dispatcher in
       
       TwitterClient.fetchTweets(amount: count).then { serverTweets -> Void in
@@ -46,7 +46,7 @@ struct TimelineActionCreator {
     }
   }
   
-  static func syncFavorites() -> ActionProvider {
+  static func syncFavorites() -> ActionCreator {
     return { (var state: TimelineState, dispatcher) -> Action? in
       
       var syncPromises = [Promise<(Tweet?, NSError?)>]()

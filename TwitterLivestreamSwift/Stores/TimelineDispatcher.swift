@@ -16,18 +16,19 @@ Maintains State
 let storeQueue = dispatch_queue_create("de.benjamin-encz.twitterswift", nil)
 
 typealias TimelineState = (serverState: [Tweet], localState: [Tweet])
+
 typealias TimelineMergedState = (serverState: [Tweet], localState: [Tweet], mergedState: [Tweet])
 
 class TimelineDispatcher {
   
-  private var timelineState: TimelineState = TimelineStore.handleAction(action: .Mount)
+  private var timelineState: TimelineState = TimelineReducers.handleAction(action: .Mount)
   private var timelineSubscribers: [TimelineSubscriber] = []
   
-  func dispatch(actionProvider: ActionProviderProvider) {
+  func dispatch(actionProvider: ActionCreatorProvider) {
     // find store
     let action = actionProvider()(state: timelineState, dispatcher: self)
     if let providedAction = action {
-      timelineState = TimelineStore.handleAction(state: timelineState, action: providedAction)
+      timelineState = TimelineReducers.handleAction(state: timelineState, action: providedAction)
       // update subscribers with new state
       for subscriber in timelineSubscribers {
         let mergedState = mergeListIntoListLeftPriority(timelineState.localState, timelineState.serverState)
@@ -44,8 +45,8 @@ class TimelineDispatcher {
   
 }
 
-typealias ActionProviderProvider = () -> ActionProvider
-typealias ActionProvider = (state: TimelineState, dispatcher: TimelineDispatcher) -> Action?
+typealias ActionCreatorProvider = () -> ActionCreator
+typealias ActionCreator = (state: TimelineState, dispatcher: TimelineDispatcher) -> Action?
 
 protocol TimelineSubscriber {
   func newState(state: TimelineMergedState)
