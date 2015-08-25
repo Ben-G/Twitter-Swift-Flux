@@ -5,7 +5,7 @@ This project is used as proof for the overall architecture discussed in this tal
 
 It's an attempt to use a [flux](https://facebook.github.io/flux/)-ish architecture on iOS:
 
-![image](readme/fluxish-diagram.png)
+![image](Readme/fluxish-diagram.png)
 
 ##Installation
 
@@ -25,4 +25,4 @@ Once you have created an app you need to create a `.plist` file called `TwitterK
 
 Finally, you need to fill the plist with the `consumer_key` and `consumer_secret` provided by twitter:
 
-![image](readme/twitter_key_setup.png)
+![image](Readme/twitter_key_setup.png)
