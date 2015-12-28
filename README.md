@@ -1,3 +1,9 @@
+# This Project is now Outdated: Check Out [Swift Flow](https://github.com/swift-flow/swift-flow)
+
+The ideas from this project have been used to build a library for unidirectional data flow in Swift: [Swift Flow](https://github.com/swift-flow/swift-flow). If you're interested in this architecture you should go check the project out.
+
+-----
+
 # About this Project
 
 This is an experimental project, the main goal was to create an App that heavily relies on value types instead of reference types.
